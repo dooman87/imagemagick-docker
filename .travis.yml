@@ -9,4 +9,5 @@ before_install:
 script:
 - docker run --rm -v $(pwd):/imgs im -resize 500 /imgs/test.jpg /imgs/test-resize.jpg
 - docker run --rm -v $(pwd):/imgs im -resize 500 /imgs/test.jpg webp:/imgs/test-resize.webp
+- docker run --rm -v $(pwd):/imgs im -resize 500 /imgs/test.jpg jxr:/imgs/test-resize.jxr
 - ls -l

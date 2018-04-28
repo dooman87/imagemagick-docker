@@ -5,7 +5,7 @@ RUN dnf -y install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-re
 
 WORKDIR /opt
 
-RUN yum install -y libwmf-lite pangomm libtool-ltdl ghostscript fftw-libs cairo libICE libSM libX11 libXext libXt libgomp  libjpeg  libpng libtiff libwebp ilmbase OpenEXR-libs libde265 LibRaw && \
+RUN yum install -y libwmf-lite pangomm libtool-ltdl ghostscript fftw-libs cairo libICE libSM libX11 libXext libXt libgomp  libjpeg  libpng libtiff libwebp ilmbase OpenEXR-libs libde265 LibRaw jxrlib && \
     curl https://www.imagemagick.org/download/linux/CentOS/x86_64/ImageMagick-libs-7.0.7-28.x86_64.rpm -o ImageMagick-libs.rpm && \
     curl https://www.imagemagick.org/download/linux/CentOS/x86_64/ImageMagick-7.0.7-28.x86_64.rpm -o ImageMagick.rpm && \
     rpm -Uvh ImageMagick-libs.rpm && \
