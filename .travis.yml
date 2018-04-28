@@ -7,4 +7,4 @@ before_install:
 - docker build -t im .
 
 script:
-- docker run --rm im convert --help
+- docker run --rm im --help
