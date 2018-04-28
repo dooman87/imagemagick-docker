@@ -1,9 +1,11 @@
-FROM centos:7.3.1611
+FROM fedora:27
 
-RUN yum -y update
+RUN dnf -y install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm && \
+    yum -y update
 
 WORKDIR /opt
-RUN yum install -y libwmf-lite pangomm libtool-ltdl ghostscript fftw-libs cairo libICE libSM libX11 libXext libXt libgomp  libjpeg  libpng15 libtiff libtiff && \
+
+RUN yum install -y libwmf-lite pangomm libtool-ltdl ghostscript fftw-libs cairo libICE libSM libX11 libXext libXt libgomp  libjpeg  libpng libtiff libwebp ilmbase OpenEXR-libs libde265 LibRaw && \
     curl https://www.imagemagick.org/download/linux/CentOS/x86_64/ImageMagick-libs-7.0.7-28.x86_64.rpm -o ImageMagick-libs.rpm && \
     curl https://www.imagemagick.org/download/linux/CentOS/x86_64/ImageMagick-7.0.7-28.x86_64.rpm -o ImageMagick.rpm && \
     rpm -Uvh ImageMagick-libs.rpm && \
