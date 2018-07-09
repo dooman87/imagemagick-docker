@@ -5,12 +5,11 @@ RUN dnf -y install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-re
 
 WORKDIR /opt
 
-RUN yum install -y libwmf-lite pangomm libtool-ltdl ghostscript fftw-libs cairo libICE libSM libX11 libXext libXt libgomp libjpeg  libpng libpng15 libtiff libwebp ilmbase OpenEXR-libs libde265 LibRaw jxrlib libraqm fribidi && \
-    curl https://www.imagemagick.org/download/linux/CentOS/x86_64/ImageMagick-libs-7.0.8-2.x86_64.rpm -o ImageMagick-libs.rpm && \
-    curl https://www.imagemagick.org/download/linux/CentOS/x86_64/ImageMagick-7.0.8-2.x86_64.rpm -o ImageMagick.rpm && \
-    rpm -Uvh ImageMagick-libs.rpm && \
-    rpm -Uvh ImageMagick.rpm && \
-    yum clean all && \
-    rm *.rpm
+RUN yum install -y libwmf-lite pangomm libtool-ltdl ghostscript fftw-libs cairo libICE libSM libX11 libXext libXt libgomp libjpeg  libpng libpng15 libtiff libwebp ilmbase OpenEXR-libs libde265 LibRaw jxrlib libraqm fribidi git make automake gcc && \
+    git clone https://github.com/ImageMagick/ImageMagick.git && \
+    cd ImageMagick && git checkout 7.0.8-5 && \
+    ./configure && make && make install && \
+    cd ../ && \
+    rm -rf ./ImageMagick && yum remove -y git make automake gcc && yum clean all
 
 ENTRYPOINT ["convert"]
