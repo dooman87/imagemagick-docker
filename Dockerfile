@@ -11,7 +11,7 @@ RUN yum install -y libtool-ltdl libjpeg libjpeg-devel libpng libpng-devel libtif
     ./configure && make && make install && \
     cd ../ && \
     rm -rf ./ImageMagick && \
-    yum remove -y git make automake gcc pkgconf libjpeg-devel libpng-devel libtiff-devel libwebp-devel LibRaw-devel && \
+    yum remove -y git make automake gcc libjpeg-devel libpng-devel libtiff-devel libwebp-devel LibRaw-devel && \
     yum clean all
 
 ENTRYPOINT ["convert"]
