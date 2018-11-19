@@ -21,5 +21,8 @@ You can change entrypoint and pass other IM commands to execute. For instance,
 $ docker run --entrypoint=identify -v /your/images:/imgs dpokidov/imagemagick /imgs/sample.png
 ```
 
+## Base images 
 
+There are two base images: Fedora:27 and Debian Stretch. By default Fedora is used. To use debian use
+:stretch tag instead.
 
