@@ -5,7 +5,7 @@
 
 ## Overview
 
-Delivers the latest version of the [ImageMagick](imagemagick.org) 7 to your environment in Docker container.
+Delivers the latest version of the [ImageMagick](https://github.com/ImageMagick/ImageMagick) 7 to your environment in Docker container.
 
 ## Usage
 
