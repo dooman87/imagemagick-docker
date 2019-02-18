@@ -7,7 +7,7 @@ WORKDIR /opt
 
 RUN yum install -y libtool-ltdl libjpeg libjpeg-devel libpng libpng-devel libtiff libtiff-devel libwebp libwebp-devel LibRaw LibRaw-devel jxrlib git make automake gcc pkgconf && \
     git clone https://github.com/ImageMagick/ImageMagick.git && \
-    cd ImageMagick && git checkout 7.0.8-25 && \
+    cd ImageMagick && git checkout 7.0.8-27 && \
     ./configure && make && make install && \
     cd ../ && \
     rm -rf ./ImageMagick && \
