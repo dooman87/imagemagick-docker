@@ -5,7 +5,7 @@ RUN apt-get -y update && \
     apt-get -y install git make gcc pkg-config autoconf && \
     apt-get -y install libpng16-16 libpng-dev libjpeg62-turbo libjpeg62-turbo-dev libwebp6 libwebp-dev libgomp1 libwebpmux2 libwebpdemux2 && \
     git clone https://github.com/ImageMagick/ImageMagick.git && \
-    cd ImageMagick && git checkout 7.0.8-66 && \
+    cd ImageMagick && git checkout 7.0.8-68 && \
     ./configure && make && make install && \
     ldconfig /usr/local/lib && \
     apt-get remove --autoremove --purge -y gcc make git autoconf pkg-config libpng-dev libjpeg62-turbo-dev libwebp-dev && \
