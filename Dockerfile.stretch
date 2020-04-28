@@ -1,4 +1,4 @@
-ARG IM_VERSION=7.0.10-6
+ARG IM_VERSION=7.0.10-9
 
 FROM debian:stretch-slim
 
