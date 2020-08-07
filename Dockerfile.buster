@@ -1,0 +1,20 @@
+FROM debian:buster
+
+RUN apt-get update && \
+    apt-get install -y git make gcc pkg-config autoconf curl g++ && \
+    # LibHeif
+    apt-get install -y libde265-0 libde265-dev libjpeg62-turbo libjpeg62-turbo-dev x265 libx265-dev libtool && \
+    # IM
+    apt-get -y install libpng16-16 libpng-dev libjpeg62-turbo libjpeg62-turbo-dev libwebp6 libwebp-dev libgomp1 libwebpmux2 libwebpdemux2 ghostscript
+
+RUN curl -L https://github.com/strukturag/libheif/releases/download/v1.7.0/libheif-1.7.0.tar.gz -o libheif.tar.gz && \
+    tar -xzvf libheif.tar.gz && cd libheif-1.7.0/ && ./autogen.sh && ./configure && make && make install && \
+    git clone https://github.com/ImageMagick/ImageMagick.git && \
+    cd ImageMagick && git checkout ${IM_VERSION} && \
+    ./configure && make && make install && \
+    ldconfig /usr/local/lib && \
+    apt-get remove --autoremove --purge -y gcc make git autoconf pkg-config libpng-dev libjpeg62-turbo-dev libwebp-dev && \
+    rm -rf /var/lib/apt/lists/* && \
+    rm -rf /ImageMagick
+
+
