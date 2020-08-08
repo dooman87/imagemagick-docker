@@ -1,19 +1,38 @@
 FROM debian:buster
 
-RUN apt-get update && \
+ARG IM_VERSION=7.0.10-25
+ARG LIB_HEIF_VERSION=1.7.0
+
+RUN apt-get -y update && \
+    apt-get -y upgrade && \
     apt-get install -y git make gcc pkg-config autoconf curl g++ && \
+    # libaom-2
+    apt-get install -y yasm cmake && \
     # LibHeif
     apt-get install -y libde265-0 libde265-dev libjpeg62-turbo libjpeg62-turbo-dev x265 libx265-dev libtool && \
     # IM
-    apt-get -y install libpng16-16 libpng-dev libjpeg62-turbo libjpeg62-turbo-dev libwebp6 libwebp-dev libgomp1 libwebpmux2 libwebpdemux2 ghostscript
+    apt-get -y install libpng16-16 libpng-dev libjpeg62-turbo libjpeg62-turbo-dev libwebp6 libwebp-dev libgomp1 libwebpmux3 libwebpdemux2 ghostscript
 
-RUN curl -L https://github.com/strukturag/libheif/releases/download/v1.7.0/libheif-1.7.0.tar.gz -o libheif.tar.gz && \
-    tar -xzvf libheif.tar.gz && cd libheif-1.7.0/ && ./autogen.sh && ./configure && make && make install && \
-    git clone https://github.com/ImageMagick/ImageMagick.git && \
+RUN git clone https://aomedia.googlesource.com/aom && \
+    cd aom && git checkout v2.0.0 && cd ..\
+    mkdir build_aom && \
+    cd build_aom && \
+    cmake ../aom/ -DENABLE_TESTS=0 -DBUILD_SHARED_LIBS=1 && make && make install && \
+    ldconfig /usr/local/lib && \
+    cd .. && \
+    rm -rf aom && \
+    rm -rf aom_build
+
+RUN curl -L https://github.com/strukturag/libheif/releases/download/v${LIB_HEIF_VERSION}/libheif-${LIB_HEIF_VERSION}.tar.gz -o libheif.tar.gz && \
+    tar -xzvf libheif.tar.gz && cd libheif-${LIB_HEIF_VERSION}/ && ./autogen.sh && ./configure && make && make install && cd .. && \
+    ldconfig /usr/local/lib && \
+    rm -rf libheif-${LIB_HEIF_VERSION} && rm libheif.tar.gz
+
+RUN git clone https://github.com/ImageMagick/ImageMagick.git && \
     cd ImageMagick && git checkout ${IM_VERSION} && \
     ./configure && make && make install && \
     ldconfig /usr/local/lib && \
-    apt-get remove --autoremove --purge -y gcc make git autoconf pkg-config libpng-dev libjpeg62-turbo-dev libwebp-dev && \
+    apt-get remove --autoremove --purge -y gcc make cmake yasm git autoconf pkg-config libpng-dev libjpeg62-turbo-dev libwebp-dev libde265-dev libx265-dev && \
     rm -rf /var/lib/apt/lists/* && \
     rm -rf /ImageMagick
 
