@@ -8,9 +8,12 @@
 
 Delivers the latest version of the [ImageMagick](https://github.com/ImageMagick/ImageMagick) 7 to your environment in Docker container.
 
+The purpose of that image is to be able to run the latest version of ImageMagick in stable
+Linux environment with supporting modern web formats. 
+
 ## Usage
 
-By default container will run convert command
+By default, container will run convert command
 
 ```
 $ docker run -v /your/images:/imgs dpokidov/imagemagick /imgs/sample.png -resize 100x100 /imgs/resized-sample.png
@@ -24,6 +27,13 @@ $ docker run --entrypoint=identify -v /your/images:/imgs dpokidov/imagemagick /i
 
 ## Base images 
 
-There are two base images: Fedora:27 and Debian Stretch. By default Fedora is used. To use debian use
-:stretch tag instead.
+There are three base images: Fedora:27, Debian Buster (stable) and Debian Stretch (oldstable). By default Fedora is used. 
+Use tags to swtich between base images. Not all images support the same features. Below is a table of known
+formats supported by different base images:
+
+| Base Image | Jpeg  | PNG   | JpegXR   | WebP   | AVIF   | PDF   |
+| ---------- | :---: | :---: | :------: | :----: | :----: | :---: |
+| Fedora     | X     | X     | X        | X      |        | X     |
+| Stretch    | X     | X     | X        |        |        | X     |
+| Buster     | X     | X     | X        |        | X      | X     |
 
