@@ -4,21 +4,30 @@ services:
     - docker
 
 before_install:
-- docker build -t im .
+- docker build -t im-fedora27 -f Dockerfile.fedora27 .
 - docker build -t im-stretch -f Dockerfile.stretch .
+- docker build -t im-buster -f Dockerfile.buster .
 
 script:
-- docker run --rm -v $(pwd):/imgs im -resize 500 /imgs/test.jpg /imgs/test-resize.jpg
-- docker run --rm -v $(pwd):/imgs im -resize 500 /imgs/test.jpg webp:/imgs/test-jpg.webp
-- docker run --rm -v $(pwd):/imgs im -resize 500 /imgs/test.jpg jxr:/imgs/test-jpg.jxr
-- docker run --rm -v $(pwd):/imgs im -resize 100 /imgs/test.png /imgs/test-resize.png
-- docker run --rm -v $(pwd):/imgs im -resize 100 /imgs/test.png webp:/imgs/test-png.webp
-- docker run --rm -v $(pwd):/imgs im -resize 100 /imgs/test.png jxr:/imgs/test-png.jxr
-- docker run --rm -v $(pwd):/imgs im /imgs/test.pdf /imgs/test-pdf.png
+- docker run --rm -v $(pwd):/imgs im-fedora27 -resize 500 /imgs/test.jpg /imgs/test-resize.jpg
+- docker run --rm -v $(pwd):/imgs im-fedora27 -resize 500 /imgs/test.jpg webp:/imgs/test-jpg.webp
+- docker run --rm -v $(pwd):/imgs im-fedora27 -resize 500 /imgs/test.jpg jxr:/imgs/test-jpg.jxr
+- docker run --rm -v $(pwd):/imgs im-fedora27 -resize 100 /imgs/test.png /imgs/test-resize.png
+- docker run --rm -v $(pwd):/imgs im-fedora27 -resize 100 /imgs/test.png webp:/imgs/test-png.webp
+- docker run --rm -v $(pwd):/imgs im-fedora27 -resize 100 /imgs/test.png jxr:/imgs/test-png.jxr
+- docker run --rm -v $(pwd):/imgs im-fedora27 /imgs/test.pdf /imgs/test-pdf.png
 - ls -l
 - docker run --rm -v $(pwd):/imgs im-stretch -resize 500 /imgs/test.jpg /imgs/test-resize.jpg
 - docker run --rm -v $(pwd):/imgs im-stretch -resize 500 /imgs/test.jpg webp:/imgs/test-jpg.webp
 - docker run --rm -v $(pwd):/imgs im-stretch -resize 100 /imgs/test.png /imgs/test-resize.png
 - docker run --rm -v $(pwd):/imgs im-stretch -resize 100 /imgs/test.png webp:/imgs/test-png.webp
 - docker run --rm -v $(pwd):/imgs im-stretch /imgs/test.pdf /imgs/test-pdf.png
+- ls -l
+- docker run --rm -v $(pwd):/imgs im-buster -resize 500 /imgs/test.jpg /imgs/test-resize.jpg
+- docker run --rm -v $(pwd):/imgs im-buster -resize 500 /imgs/test.jpg webp:/imgs/test-jpg.webp
+- docker run --rm -v $(pwd):/imgs im-buster -resize 500 /imgs/test.jpg avif:/imgs/test-jpg.avif
+- docker run --rm -v $(pwd):/imgs im-buster -resize 100 /imgs/test.png /imgs/test-resize.png
+- docker run --rm -v $(pwd):/imgs im-buster -resize 100 /imgs/test.png webp:/imgs/test-png.webp
+- docker run --rm -v $(pwd):/imgs im-buster -resize 100 /imgs/test.png avif:/imgs/test-png.avif
+- docker run --rm -v $(pwd):/imgs im-buster /imgs/test.pdf /imgs/test-pdf.png
 - ls -l
