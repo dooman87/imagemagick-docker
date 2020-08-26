@@ -1,7 +1,7 @@
 FROM debian:buster-slim
 
 ARG IM_VERSION=7.0.10-25
-ARG LIB_HEIF_VERSION=1.7.0
+ARG LIB_HEIF_VERSION=1.8.0
 ARG LIB_AOM_VERSION=2.0.0
 
 RUN apt-get -y update && \
