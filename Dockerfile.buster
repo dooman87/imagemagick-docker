@@ -31,7 +31,7 @@ RUN apt-get -y update && \
     # Building ImageMagick
     git clone https://github.com/ImageMagick/ImageMagick.git && \
     cd ImageMagick && git checkout ${IM_VERSION} && \
-    ./configure --without-magick-plus-plus --disable-docs --disable-static && \
+    ./configure --without-magick-plus-plus --disable-docs --disable-static --with-libtiff && \
     make && make install && \
     ldconfig /usr/local/lib && \
     apt-get remove --autoremove --purge -y gcc make cmake curl g++ yasm git autoconf pkg-config libpng-dev libjpeg62-turbo-dev libwebp-dev libde265-dev libx265-dev && \
