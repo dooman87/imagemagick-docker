@@ -12,7 +12,7 @@ RUN apt-get -y update && \
     # libheif
     libde265-0 libde265-dev libjpeg62-turbo libjpeg62-turbo-dev x265 libx265-dev libtool \
     # IM
-    libpng16-16 libpng-dev libjpeg62-turbo libjpeg62-turbo-dev libwebp6 libwebp-dev libgomp1 libwebpmux3 libwebpdemux2 ghostscript && \
+    libpng16-16 libpng-dev libjpeg62-turbo libjpeg62-turbo-dev libwebp6 libwebp-dev libgomp1 libwebpmux3 libwebpdemux2 ghostscript libxml2-dev libxml2-utils && \
     # Building libaom
     git clone https://aomedia.googlesource.com/aom && \
     cd aom && git checkout v${LIB_AOM_VERSION} && cd .. && \
