@@ -1,6 +1,6 @@
 [![Docker Automated build](https://img.shields.io/docker/automated/dpokidov/imagemagick.svg)](https://hub.docker.com/r/dpokidov/imagemagick/)
 [![Docker Pulls](https://img.shields.io/docker/pulls/dpokidov/imagemagick)](https://hub.docker.com/r/dpokidov/imagemagick/)
-[![Build Status](https://travis-ci.org/dooman87/imagemagick-docker.svg?branch=master)](https://travis-ci.org/dooman87/imagemagick-docker)
+![ci](https://github.com/dooman87/imagemagick-docker/workflows/ci/badge.svg)
 
 # imagemagick-docker
 
