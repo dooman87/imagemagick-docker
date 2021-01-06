@@ -15,6 +15,14 @@ jobs:
         name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
       -
+        name: Cache Docker layers
+        uses: actions/cache@v2
+        with:
+          path: /tmp/.buildx-cache
+          key: ${{ runner.os }}-buildx-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-buildx-
+      -
         name: Build Fedora image
         id: docker_build
         uses: docker/build-push-action@v2
@@ -24,11 +32,13 @@ jobs:
           push: false
           load: true
           tags: im-fedora27
+          cache-from: type=local,src=/tmp/.buildx-cache
+          cache-to: type=local,dest=/tmp/.buildx-cache
       -
         name: Testing Fedora image
         run: |
           docker run --rm -v $(pwd):/imgs im-fedora27 -resize 500 /imgs/test.jpg /imgs/test-resize.jpg
-          docker run --rm -v $(pwd):/imgs im-fedora27 -resize 500 /imgs/test.jpg webp:/imgs/test-jpg.webp
+          docker run --rm -v $(pwd):/imgs im-fedora27 -resize 500 /imgs/test123123.jpg webp:/imgs/test-jpg.webp
           docker run --rm -v $(pwd):/imgs im-fedora27 -resize 500 /imgs/test.jpg jxr:/imgs/test-jpg.jxr
           docker run --rm -v $(pwd):/imgs im-fedora27 -resize 100 /imgs/test.png /imgs/test-resize.png
           docker run --rm -v $(pwd):/imgs im-fedora27 -resize 100 /imgs/test.png webp:/imgs/test-png.webp
