@@ -24,7 +24,7 @@ jobs:
             ${{ runner.os }}-buildx-
       -
         name: Build Fedora image
-        id: docker_build
+        id: docker_build_fedora
         uses: docker/build-push-action@v2
         with:
           context: .
@@ -46,7 +46,7 @@ jobs:
           docker run --rm -v $(pwd):/imgs im-fedora27 /imgs/test.pdf /imgs/test-pdf.png
       -
         name: Build Debian Stretch Image
-        id: docker_build
+        id: docker_build_stretch
         uses: docker/build-push-action@v2
         with:
           context: .
@@ -67,7 +67,7 @@ jobs:
           docker run --rm -v $(pwd):/imgs im-stretch /imgs/jpg-with-metadata.jpg /imgs/jpg-with-metadata.webp
       -
         name: Build Debian Stretch Image
-        id: docker_build
+        id: docker_build_buster
         uses: docker/build-push-action@v2
         with:
           context: .
