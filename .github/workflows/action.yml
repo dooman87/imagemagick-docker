@@ -35,12 +35,56 @@ jobs:
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
       -
-        name: Testing Fedora image
+        name: Testing Fedora Image
         run: |
           docker run --rm -v $(pwd):/imgs im-fedora27 -resize 500 /imgs/test.jpg /imgs/test-resize.jpg
-          docker run --rm -v $(pwd):/imgs im-fedora27 -resize 500 /imgs/test123123.jpg webp:/imgs/test-jpg.webp
+          docker run --rm -v $(pwd):/imgs im-fedora27 -resize 500 /imgs/test.jpg webp:/imgs/test-jpg.webp
           docker run --rm -v $(pwd):/imgs im-fedora27 -resize 500 /imgs/test.jpg jxr:/imgs/test-jpg.jxr
           docker run --rm -v $(pwd):/imgs im-fedora27 -resize 100 /imgs/test.png /imgs/test-resize.png
           docker run --rm -v $(pwd):/imgs im-fedora27 -resize 100 /imgs/test.png webp:/imgs/test-png.webp
           docker run --rm -v $(pwd):/imgs im-fedora27 -resize 100 /imgs/test.png jxr:/imgs/test-png.jxr
           docker run --rm -v $(pwd):/imgs im-fedora27 /imgs/test.pdf /imgs/test-pdf.png
+      -
+        name: Build Debian Stretch Image
+        id: docker_build
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: ./Dockerfile.stretch
+          push: false
+          load: true
+          tags: im-stretch
+          cache-from: type=local,src=/tmp/.buildx-cache
+          cache-to: type=local,dest=/tmp/.buildx-cache
+      -
+        name: Testing Debian Stretch Image
+        run: |
+          docker run --rm -v $(pwd):/imgs im-stretch -resize 500 /imgs/test.jpg /imgs/test-resize.jpg
+          docker run --rm -v $(pwd):/imgs im-stretch -resize 500 /imgs/test.jpg webp:/imgs/test-jpg.webp
+          docker run --rm -v $(pwd):/imgs im-stretch -resize 100 /imgs/test.png /imgs/test-resize.png
+          docker run --rm -v $(pwd):/imgs im-stretch -resize 100 /imgs/test.png webp:/imgs/test-png.webp
+          docker run --rm -v $(pwd):/imgs im-stretch /imgs/test.pdf /imgs/test-pdf.png
+          docker run --rm -v $(pwd):/imgs im-stretch /imgs/jpg-with-metadata.jpg /imgs/jpg-with-metadata.webp
+      -
+        name: Build Debian Stretch Image
+        id: docker_build
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: ./Dockerfile.buster
+          push: false
+          load: true
+          tags: im-buster
+          cache-from: type=local,src=/tmp/.buildx-cache
+          cache-to: type=local,dest=/tmp/.buildx-cache
+      -
+        name: Testing Debian Stretch Image
+        run: |
+          docker run --rm -v $(pwd):/imgs im-buster -resize 500 /imgs/test.jpg /imgs/test-resize.jpg
+          docker run --rm -v $(pwd):/imgs im-buster -resize 500 /imgs/test.jpg webp:/imgs/test-jpg.webp
+          docker run --rm -v $(pwd):/imgs im-buster -resize 500 /imgs/test.jpg avif:/imgs/test-jpg.avif
+          docker run --rm -v $(pwd):/imgs im-buster -resize 100 /imgs/test.png /imgs/test-resize.png
+          docker run --rm -v $(pwd):/imgs im-buster -resize 100 /imgs/test.png webp:/imgs/test-png.webp
+          docker run --rm -v $(pwd):/imgs im-buster -resize 100 /imgs/test.png avif:/imgs/test-png.avif
+          docker run --rm -v $(pwd):/imgs im-buster /imgs/test.pdf /imgs/test-pdf.png
+          docker run --rm -v $(pwd):/imgs im-buster /imgs/jpg-with-metadata.jpg /imgs/jpg-with-metadata.webp
