@@ -3,16 +3,27 @@ FROM debian:buster-slim
 ARG IM_VERSION=7.0.11-2
 ARG LIB_HEIF_VERSION=1.11.0
 ARG LIB_AOM_VERSION=2.0.2
+ARG LIB_JPEGXL_VERSION=0.3.7
 
 RUN apt-get -y update && \
     apt-get -y upgrade && \
-    apt-get install -y git make gcc pkg-config autoconf curl g++ \
+    apt-get install -y git make gcc pkg-config autoconf curl g++ cmake clang-7  \
     # libaom
     yasm cmake \
     # libheif
     libde265-0 libde265-dev libjpeg62-turbo libjpeg62-turbo-dev x265 libx265-dev libtool \
     # IM
-    libpng16-16 libpng-dev libjpeg62-turbo libjpeg62-turbo-dev libwebp6 libwebp-dev libgomp1 libwebpmux3 libwebpdemux2 ghostscript libxml2-dev libxml2-utils && \
+    libpng16-16 libpng-dev libjpeg62-turbo libjpeg62-turbo-dev libwebp6 libwebp-dev libgomp1 libwebpmux3 libwebpdemux2 ghostscript libxml2-dev libxml2-utils
+    # jpeg-xl
+    libbrotli-dev && \
+    # Building jpeg-xl
+    export CC=clang-7 CXX=clang++-7 && \
+    git clone https://gitlab.com/wg1/jpeg-xl.git --recursive && \
+    cd jpeg-xl && git checkout v${LIB_JPEGXL_VERSION} && \
+    mkdir build && cd build && \
+    cmake -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=OFF .. && \
+    cmake --build . -- -j$(nproc) && \
+    cmake --install .
     # Building libaom
     git clone https://aomedia.googlesource.com/aom && \
     cd aom && git checkout v${LIB_AOM_VERSION} && cd .. && \
@@ -34,8 +45,9 @@ RUN apt-get -y update && \
     ./configure --without-magick-plus-plus --disable-docs --disable-static && \
     make && make install && \
     ldconfig /usr/local/lib && \
-    apt-get remove --autoremove --purge -y gcc make cmake curl g++ yasm git autoconf pkg-config libpng-dev libjpeg62-turbo-dev libwebp-dev libde265-dev libx265-dev libxml2-dev && \
+    apt-get remove --autoremove --purge -y gcc clang-7 make cmake curl g++ yasm git autoconf pkg-config libpng-dev libjpeg62-turbo-dev libwebp-dev libde265-dev libx265-dev libxml2-dev libbrotli-dev && \
     rm -rf /var/lib/apt/lists/* && \
-    rm -rf /ImageMagick
+    rm -rf /ImageMagick && \
+    convert -list format
 
 ENTRYPOINT ["convert"]
