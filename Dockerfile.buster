@@ -7,7 +7,7 @@ ARG LIB_JPEGXL_VERSION=0.3.7
 
 RUN apt-get -y update && \
     apt-get -y upgrade && \
-    apt-get install -y git make gcc pkg-config autoconf curl g++ cmake clang-7  \
+    apt-get install -y git make gcc pkg-config autoconf curl g++ cmake clang-7 libomp5-7  \
     # libaom
     yasm cmake \
     # libheif
