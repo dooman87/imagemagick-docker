@@ -23,7 +23,7 @@ RUN apt-get -y update && \
     mkdir build && cd build && \
     cmake -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=OFF .. && \
     cmake --build . -- -j$(nproc) && \
-    cmake --install .
+    cmake --install . && \
     # Building libaom
     git clone https://aomedia.googlesource.com/aom && \
     cd aom && git checkout v${LIB_AOM_VERSION} && cd .. && \
