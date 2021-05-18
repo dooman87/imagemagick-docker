@@ -78,7 +78,7 @@ jobs:
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
       -
-        name: Testing Debian Stretch Image
+        name: Testing Debian Buster Image
         run: |
           docker run --rm -v $(pwd):/imgs im-buster -resize 500 /imgs/test.jpg /imgs/test-resize.jpg
           docker run --rm -v $(pwd):/imgs im-buster -resize 500 /imgs/test.jpg webp:/imgs/test-jpg.webp
@@ -88,3 +88,6 @@ jobs:
           docker run --rm -v $(pwd):/imgs im-buster -resize 100 /imgs/test.png avif:/imgs/test-png.avif
           docker run --rm -v $(pwd):/imgs im-buster /imgs/test.pdf /imgs/test-pdf.png
           docker run --rm -v $(pwd):/imgs im-buster /imgs/jpg-with-metadata.jpg /imgs/jpg-with-metadata.webp
+          docker run --rm -v $(pwd):/imgs im-buster -resize 200 /imgs/test.tiff /imgs/test-resize.tiff
+          docker run --rm -v $(pwd):/imgs im-buster -resize 200 /imgs/test.tiff webp:/imgs/test-tiff.webp
+          docker run --rm -v $(pwd):/imgs im-buster -resize 200 /imgs/test.tiff avif:/imgs/test-tiff.avif
