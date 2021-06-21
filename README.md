@@ -33,7 +33,7 @@ formats supported by different base images:
 
 | Base Image | Jpeg  | PNG   | JpegXR   | WebP   | AVIF   | PDF   | TIFF |
 | ---------- | :---: | :---: | :------: | :----: | :----: | :---: | :--: |
-| fedora27   | X     | X     | X        | X      |        | X     |      |
-| stretch    | X     | X     |          | X      |        | X     |      |
+| fedora27   | X     | X     | X        | X      |        | X     | X    |
+| stretch    | X     | X     |          | X      |        | X     | X    |
 | buster     | X     | X     |          | X      | X      | X     | X    |
 

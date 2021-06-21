@@ -44,6 +44,8 @@ jobs:
           docker run --rm -v $(pwd):/imgs im-fedora27 -resize 100 /imgs/test.png webp:/imgs/test-png.webp
           docker run --rm -v $(pwd):/imgs im-fedora27 -resize 100 /imgs/test.png jxr:/imgs/test-png.jxr
           docker run --rm -v $(pwd):/imgs im-fedora27 /imgs/test.pdf /imgs/test-pdf.png
+          docker run --rm -v $(pwd):/imgs im-fedora27 -resize 200 /imgs/test.tiff /imgs/test-resize.tiff
+          docker run --rm -v $(pwd):/imgs im-fedora27 -resize 200 /imgs/test.tiff webp:/imgs/test-tiff.webp
       -
         name: Build Debian Stretch Image
         id: docker_build_stretch
@@ -65,6 +67,8 @@ jobs:
           docker run --rm -v $(pwd):/imgs im-stretch -resize 100 /imgs/test.png webp:/imgs/test-png.webp
           docker run --rm -v $(pwd):/imgs im-stretch /imgs/test.pdf /imgs/test-pdf.png
           docker run --rm -v $(pwd):/imgs im-stretch /imgs/jpg-with-metadata.jpg /imgs/jpg-with-metadata.webp
+          docker run --rm -v $(pwd):/imgs im-stretch -resize 200 /imgs/test.tiff /imgs/test-resize.tiff
+          docker run --rm -v $(pwd):/imgs im-stretch -resize 200 /imgs/test.tiff webp:/imgs/test-tiff.webp
       -
         name: Build Debian Stretch Image
         id: docker_build_buster
