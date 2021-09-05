@@ -1,9 +1,9 @@
 FROM debian:buster-slim
 
-ARG IM_VERSION=7.1.0-1
+ARG IM_VERSION=7.1.0-6
 ARG LIB_HEIF_VERSION=1.12.0
-ARG LIB_AOM_VERSION=3.1.0
-ARG LIB_WEBP_VERSION=1.2.0
+ARG LIB_AOM_VERSION=3.1.2
+ARG LIB_WEBP_VERSION=1.2.1
 
 RUN apt-get -y update && \
     apt-get -y upgrade && \
