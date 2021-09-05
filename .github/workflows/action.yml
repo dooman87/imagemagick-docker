@@ -3,7 +3,7 @@ name: ci
 on:
   push:
     tags-ignore:
-      - '*'
+      - '7*'
   release:
     types:
       - published
