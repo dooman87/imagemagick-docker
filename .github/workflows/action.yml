@@ -1,6 +1,12 @@
 name: ci
 
-on: [push,release]
+on:
+  push:
+    tags-ignore:
+      - *
+  release:
+    types:
+      - published
 
 jobs:
   main:
