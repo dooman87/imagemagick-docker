@@ -70,7 +70,7 @@ jobs:
           file: ./Dockerfile.fedora27
           push: true
           load: false
-          tags: ${{ github.event.tag_name }}-fedora27,latest-fedora27
+          tags: ${{ env.GITHUB_REF }}-fedora27,latest-fedora27
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
 #      -
