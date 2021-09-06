@@ -69,8 +69,8 @@ jobs:
           load: false
 #          tags: ${{ github.ref }}-fedora27,latest-fedora27
           tags: test-gh-push
-          cache-from: type=local,src=/tmp/.buildx-cache
-          cache-to: type=local,dest=/tmp/.buildx-cache
+#          cache-from: type=local,src=/tmp/.buildx-cache
+#          cache-to: type=local,dest=/tmp/.buildx-cache
 #      -
 #        name: Build Debian Stretch Image
 #        id: docker_build_stretch
