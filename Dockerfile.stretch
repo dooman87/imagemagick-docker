@@ -1,6 +1,6 @@
 FROM debian:stretch-slim
 
-ARG IM_VERSION=7.1.0-6
+ARG IM_VERSION=7.1.0-8
 
 RUN apt-get -y update && \
     apt-get -y upgrade && \
