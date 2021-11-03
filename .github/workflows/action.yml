@@ -16,24 +16,21 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      -
-        name: Set up Docker Buildx
+      - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
       - name: Login to DockerHub
         uses: docker/login-action@v1
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      -
-        name: Cache Docker layers
+      - name: Cache Docker layers
         uses: actions/cache@v2
         with:
           path: /tmp/.buildx-cache
           key: ${{ runner.os }}-buildx-${{ github.sha }}
           restore-keys: |
             ${{ runner.os }}-buildx-
-      -
-        name: Build Fedora image
+      - name: Build Fedora image
         id: docker_build_fedora
         uses: docker/build-push-action@v2
         with:
@@ -44,8 +41,7 @@ jobs:
           tags: im-fedora27
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
-      -
-        name: Testing Fedora Image
+      - name: Testing Fedora Image
         run: |
           docker run --rm -v $(pwd):/imgs im-fedora27 -resize 500 /imgs/test.jpg /imgs/test-resize.jpg
           docker run --rm -v $(pwd):/imgs im-fedora27 -resize 500 /imgs/test.jpg webp:/imgs/test-jpg.webp
@@ -57,8 +53,7 @@ jobs:
           docker run --rm -v $(pwd):/imgs im-fedora27 -resize 200 /imgs/test.tiff /imgs/test-resize.tiff
           docker run --rm -v $(pwd):/imgs im-fedora27 -resize 200 /imgs/test.tiff webp:/imgs/test-tiff.webp
           docker run --rm -v $(pwd):/imgs im-fedora27 /imgs/test.jpg -antialias -font NimbusRoman-Bold -pointsize 20 -gravity Southeast -annotate +15+15 'TEST' /imgs/test-text.jpg
-      -
-        name: Push Fedora image
+      - name: Push Fedora image
         id: docker_push_fedora
         if: ${{ github.event_name == 'release' }}
         uses: docker/build-push-action@v2
@@ -70,8 +65,7 @@ jobs:
           tags: dpokidov/imagemagick:${{ github.event.release.tag_name }}-fedora27,dpokidov/imagemagick:latest-fedora27
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
-      -
-        name: Build Debian Stretch Image
+      - name: Build Debian Stretch Image
         id: docker_build_stretch
         uses: docker/build-push-action@v2
         with:
@@ -82,8 +76,7 @@ jobs:
           tags: im-stretch
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
-      -
-        name: Testing Debian Stretch Image
+      - name: Testing Debian Stretch Image
         run: |
           docker run --rm -v $(pwd):/imgs im-stretch -resize 500 /imgs/test.jpg /imgs/test-resize.jpg
           docker run --rm -v $(pwd):/imgs im-stretch -resize 500 /imgs/test.jpg webp:/imgs/test-jpg.webp
@@ -94,7 +87,7 @@ jobs:
           docker run --rm -v $(pwd):/imgs im-stretch -resize 200 /imgs/test.tiff /imgs/test-resize.tiff
           docker run --rm -v $(pwd):/imgs im-stretch -resize 200 /imgs/test.tiff webp:/imgs/test-tiff.webp
           docker run --rm -v $(pwd):/imgs im-stretch /imgs/test.jpg -antialias -font Helvetica-Bold -pointsize 20 -gravity Southeast -annotate +15+15 'TEST' /imgs/test-text.jpg
-      - name: Push Debian Stretch image
+      -  name: Push Debian Stretch image
         id: docker_push_stretch
         if: ${{ github.event_name == 'release' }}
         uses: docker/build-push-action@v2
@@ -106,8 +99,7 @@ jobs:
           tags: dpokidov/imagemagick:${{ github.event.release.tag_name }}-stretch,dpokidov/imagemagick:latest-stretch
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
-      -
-        name: Build Debian Buster Image
+      - name: Build Debian Buster Image
         id: docker_build_buster
         uses: docker/build-push-action@v2
         with:
@@ -118,8 +110,7 @@ jobs:
           tags: im-buster
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
-      -
-        name: Testing Debian Buster Image
+      - name: Testing Debian Buster Image
         run: |
           docker run --rm -v $(pwd):/imgs im-buster -resize 500 /imgs/test.jpg /imgs/test-resize.jpg
           docker run --rm -v $(pwd):/imgs im-buster -resize 500 /imgs/test.jpg webp:/imgs/test-jpg.webp
@@ -143,5 +134,42 @@ jobs:
           push: true
           load: false
           tags: dpokidov/imagemagick:${{ github.event.release.tag_name }},dpokidov/imagemagick:${{ github.event.release.tag_name }}-buster,dpokidov/imagemagick:latest-buster,dpokidov/imagemagick:latest
+          cache-from: type=local,src=/tmp/.buildx-cache
+          cache-to: type=local,dest=/tmp/.buildx-cache
+      - name: Build Ubuntu Image
+        id: docker_build_ubuntu
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: ./Dockerfile.ubuntu
+          push: false
+          load: true
+          tags: im-ubuntu
+          cache-from: type=local,src=/tmp/.buildx-cache
+          cache-to: type=local,dest=/tmp/.buildx-cache
+      - name: Testing Ubuntu Image
+        run: |
+          docker run --rm -v $(pwd):/imgs im-ubuntu -resize 500 /imgs/test.jpg /imgs/test-resize.jpg
+          docker run --rm -v $(pwd):/imgs im-ubuntu -resize 500 /imgs/test.jpg webp:/imgs/test-jpg.webp
+          docker run --rm -v $(pwd):/imgs im-ubuntu -resize 500 /imgs/test.jpg avif:/imgs/test-jpg.avif
+          docker run --rm -v $(pwd):/imgs im-ubuntu -resize 100 /imgs/test.png /imgs/test-resize.png
+          docker run --rm -v $(pwd):/imgs im-ubuntu -resize 100 /imgs/test.png webp:/imgs/test-png.webp
+          docker run --rm -v $(pwd):/imgs im-ubuntu -resize 100 /imgs/test.png avif:/imgs/test-png.avif
+          docker run --rm -v $(pwd):/imgs im-ubuntu /imgs/test.pdf /imgs/test-pdf.png
+          docker run --rm -v $(pwd):/imgs im-ubuntu /imgs/jpg-with-metadata.jpg /imgs/jpg-with-metadata.webp
+          docker run --rm -v $(pwd):/imgs im-ubuntu -resize 200 /imgs/test.tiff /imgs/test-resize.tiff
+          docker run --rm -v $(pwd):/imgs im-ubuntu -resize 200 /imgs/test.tiff webp:/imgs/test-tiff.webp
+          docker run --rm -v $(pwd):/imgs im-ubuntu -resize 200 /imgs/test.tiff avif:/imgs/test-tiff.avif
+          docker run --rm -v $(pwd):/imgs im-ubuntu /imgs/test.jpg -antialias -font Helvetica-Bold -pointsize 20 -gravity Southeast -annotate +15+15 'TEST' /imgs/test-text.jpg
+      - name: Push Ubuntu image
+        id: docker_push_ubuntu
+        if: ${{ github.event_name == 'release' }}
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: ./Dockerfile.ubuntu
+          push: true
+          load: false
+          tags: dpokidov/imagemagick:${{ github.event.release.tag_name }},dpokidov/imagemagick:${{ github.event.release.tag_name }}-ubuntu,dpokidov/imagemagick:latest-ubuntu,dpokidov/imagemagick:latest
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
