@@ -126,7 +126,7 @@ jobs:
           docker run --rm -v $(pwd):/imgs im-bullseye -resize 200 /imgs/test.tiff /imgs/test-resize.tiff
           docker run --rm -v $(pwd):/imgs im-bullseye -resize 200 /imgs/test.tiff webp:/imgs/test-tiff.webp
           docker run --rm -v $(pwd):/imgs im-bullseye -resize 200 /imgs/test.tiff avif:/imgs/test-tiff.avif
-          docker run --rm -v $(pwd):/imgs im-bullseye /imgs/test.jpg -antialias -font Helvetica-Bold -pointsize 20 -gravity Southeast -annotate +15+15 'TEST' /imgs/test-text.jpg
+          docker run --rm -v $(pwd):/imgs im-bullseye /imgs/test.jpg -antialias -font DejaVu-Sans -pointsize 20 -gravity Southeast -annotate +15+15 'TEST' /imgs/test-text.jpg
       - name: Push Debian Bullseye image
         id: docker_push_bullseye
         if: ${{ github.event_name == 'release' }}
