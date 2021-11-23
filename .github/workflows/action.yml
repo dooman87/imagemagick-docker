@@ -65,40 +65,6 @@ jobs:
           tags: dpokidov/imagemagick:${{ github.event.release.tag_name }}-fedora27,dpokidov/imagemagick:latest-fedora27
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
-      - name: Build Debian Stretch Image
-        id: docker_build_stretch
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          file: ./Dockerfile.stretch
-          push: false
-          load: true
-          tags: im-stretch
-          cache-from: type=local,src=/tmp/.buildx-cache
-          cache-to: type=local,dest=/tmp/.buildx-cache
-      - name: Testing Debian Stretch Image
-        run: |
-          docker run --rm -v $(pwd):/imgs im-stretch -resize 500 /imgs/test.jpg /imgs/test-resize.jpg
-          docker run --rm -v $(pwd):/imgs im-stretch -resize 500 /imgs/test.jpg webp:/imgs/test-jpg.webp
-          docker run --rm -v $(pwd):/imgs im-stretch -resize 100 /imgs/test.png /imgs/test-resize.png
-          docker run --rm -v $(pwd):/imgs im-stretch -resize 100 /imgs/test.png webp:/imgs/test-png.webp
-          docker run --rm -v $(pwd):/imgs im-stretch /imgs/test.pdf /imgs/test-pdf.png
-          docker run --rm -v $(pwd):/imgs im-stretch /imgs/jpg-with-metadata.jpg /imgs/jpg-with-metadata.webp
-          docker run --rm -v $(pwd):/imgs im-stretch -resize 200 /imgs/test.tiff /imgs/test-resize.tiff
-          docker run --rm -v $(pwd):/imgs im-stretch -resize 200 /imgs/test.tiff webp:/imgs/test-tiff.webp
-          docker run --rm -v $(pwd):/imgs im-stretch /imgs/test.jpg -antialias -font Helvetica-Bold -pointsize 20 -gravity Southeast -annotate +15+15 'TEST' /imgs/test-text.jpg
-      -  name: Push Debian Stretch image
-        id: docker_push_stretch
-        if: ${{ github.event_name == 'release' }}
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          file: ./Dockerfile.stretch
-          push: true
-          load: false
-          tags: dpokidov/imagemagick:${{ github.event.release.tag_name }}-stretch,dpokidov/imagemagick:latest-stretch
-          cache-from: type=local,src=/tmp/.buildx-cache
-          cache-to: type=local,dest=/tmp/.buildx-cache
       - name: Build Debian Buster Image
         id: docker_build_buster
         uses: docker/build-push-action@v2
@@ -136,6 +102,43 @@ jobs:
           tags: dpokidov/imagemagick:${{ github.event.release.tag_name }},dpokidov/imagemagick:${{ github.event.release.tag_name }}-buster,dpokidov/imagemagick:latest-buster,dpokidov/imagemagick:latest
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
+      - name: Build Debian Bullseye Image
+        id: docker_build_bullseye
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: ./Dockerfile.bullseye
+          push: false
+          load: true
+          tags: im-bullseye
+          cache-from: type=local,src=/tmp/.buildx-cache
+          cache-to: type=local,dest=/tmp/.buildx-cache
+      - name: Testing Debian Bullseye Image
+        run: |
+          docker run --rm -v $(pwd):/imgs im-bullseye -resize 500 /imgs/test.jpg /imgs/test-resize.jpg
+          docker run --rm -v $(pwd):/imgs im-bullseye -resize 500 /imgs/test.jpg webp:/imgs/test-jpg.webp
+          docker run --rm -v $(pwd):/imgs im-bullseye -resize 500 /imgs/test.jpg avif:/imgs/test-jpg.avif
+          docker run --rm -v $(pwd):/imgs im-bullseye -resize 100 /imgs/test.png /imgs/test-resize.png
+          docker run --rm -v $(pwd):/imgs im-bullseye -resize 100 /imgs/test.png webp:/imgs/test-png.webp
+          docker run --rm -v $(pwd):/imgs im-bullseye -resize 100 /imgs/test.png avif:/imgs/test-png.avif
+          docker run --rm -v $(pwd):/imgs im-bullseye /imgs/test.pdf /imgs/test-pdf.png
+          docker run --rm -v $(pwd):/imgs im-bullseye /imgs/jpg-with-metadata.jpg /imgs/jpg-with-metadata.webp
+          docker run --rm -v $(pwd):/imgs im-bullseye -resize 200 /imgs/test.tiff /imgs/test-resize.tiff
+          docker run --rm -v $(pwd):/imgs im-bullseye -resize 200 /imgs/test.tiff webp:/imgs/test-tiff.webp
+          docker run --rm -v $(pwd):/imgs im-bullseye -resize 200 /imgs/test.tiff avif:/imgs/test-tiff.avif
+          docker run --rm -v $(pwd):/imgs im-bullseye /imgs/test.jpg -antialias -font DejaVu-Sans -pointsize 20 -gravity Southeast -annotate +15+15 'TEST' /imgs/test-text.jpg
+      - name: Push Debian Bullseye image
+        id: docker_push_bullseye
+        if: ${{ github.event_name == 'release' }}
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: ./Dockerfile.bullseye
+          push: true
+          load: false
+          tags: dpokidov/imagemagick:${{ github.event.release.tag_name }}-bullseye,dpokidov/imagemagick:latest-bullseye
+          cache-from: type=local,src=/tmp/.buildx-cache
+          cache-to: type=local,dest=/tmp/.buildx-cache
       - name: Build Ubuntu Image
         id: docker_build_ubuntu
         uses: docker/build-push-action@v2
@@ -160,7 +163,7 @@ jobs:
           docker run --rm -v $(pwd):/imgs im-ubuntu -resize 200 /imgs/test.tiff /imgs/test-resize.tiff
           docker run --rm -v $(pwd):/imgs im-ubuntu -resize 200 /imgs/test.tiff webp:/imgs/test-tiff.webp
           docker run --rm -v $(pwd):/imgs im-ubuntu -resize 200 /imgs/test.tiff avif:/imgs/test-tiff.avif
-          docker run --rm -v $(pwd):/imgs im-ubuntu /imgs/test.jpg -antialias -font Helvetica-Bold -pointsize 20 -gravity Southeast -annotate +15+15 'TEST' /imgs/test-text.jpg
+          docker run --rm -v $(pwd):/imgs im-ubuntu /imgs/test.jpg -antialias -font DejaVu-Sans -pointsize 20 -gravity Southeast -annotate +15+15 'TEST' /imgs/test-text.jpg
       - name: Push Ubuntu image
         id: docker_push_ubuntu
         if: ${{ github.event_name == 'release' }}
@@ -170,6 +173,6 @@ jobs:
           file: ./Dockerfile.ubuntu
           push: true
           load: false
-          tags: dpokidov/imagemagick:${{ github.event.release.tag_name }},dpokidov/imagemagick:${{ github.event.release.tag_name }}-ubuntu,dpokidov/imagemagick:latest-ubuntu,dpokidov/imagemagick:latest
+          tags: dpokidov/imagemagick:${{ github.event.release.tag_name }}-ubuntu,dpokidov/imagemagick:latest-ubuntu
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
