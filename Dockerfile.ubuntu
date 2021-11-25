@@ -47,5 +47,3 @@ RUN apt-get -y update && \
     apt-get remove --autoremove --purge -y gcc make cmake curl g++ yasm git autoconf pkg-config libpng-dev libjpeg-turbo8-dev libde265-dev libx265-dev libxml2-dev libtiff-dev libfontconfig1-dev libfreetype6-dev && \
     rm -rf /var/lib/apt/lists/* && \
     rm -rf /ImageMagick
-
-ENTRYPOINT ["convert"]
