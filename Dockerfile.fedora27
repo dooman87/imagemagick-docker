@@ -16,4 +16,4 @@ RUN yum install -y libtool-ltdl libjpeg libjpeg-devel libpng libpng-devel libtif
     yum remove -y git make automake gcc libjpeg-devel libpng-devel libtiff-devel libwebp-devel LibRaw-devel fontconfig-devel freetype-devel && \
     yum clean all
 
-ENTRYPOINT ["convert"]
+CMD ["convert"]
