@@ -48,4 +48,4 @@ RUN apt-get -y update && \
     rm -rf /var/lib/apt/lists/* && \
     rm -rf /ImageMagick
 
-CMD ["magick"]
+ENTRYPOINT ["convert"]
