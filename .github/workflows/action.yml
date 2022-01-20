@@ -65,7 +65,7 @@ jobs:
           push: true
           load: false
           platforms: linux/arm64
-          tags: dpokidov/imagemagick:testarm-fedora27
+          tags: dpokidov/imagemagick:testarm2-fedora27
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
 #      - name: Build Debian Buster Image
@@ -103,7 +103,7 @@ jobs:
           push: true
           load: false
           platforms: linux/arm64
-          tags: dpokidov/imagemagick:testarm,dpokidov/imagemagick:testarm-buster
+          tags: dpokidov/imagemagick:testarm2,dpokidov/imagemagick:testarm2-buster
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
 #      - name: Build Debian Bullseye Image
@@ -141,7 +141,7 @@ jobs:
           push: true
           load: false
           platforms: linux/arm64
-          tags: dpokidov/imagemagick:testarm-bullseye
+          tags: dpokidov/imagemagick:testarm2-bullseye
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
 #      - name: Build Ubuntu Image
@@ -179,6 +179,6 @@ jobs:
           push: true
           load: false
           platforms: linux/arm64
-          tags: dpokidov/imagemagick:testarm-ubuntu
+          tags: dpokidov/imagemagick:testarm2-ubuntu
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
