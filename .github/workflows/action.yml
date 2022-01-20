@@ -65,7 +65,7 @@ jobs:
           push: true
           load: false
           platforms: linux/arm64
-          tags: dpokidov/imagemagick:testarm-fedora27,dpokidov/imagemagick:testarm-fedora27
+          tags: dpokidov/imagemagick:testarm-fedora27
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
 #      - name: Build Debian Buster Image
@@ -93,18 +93,19 @@ jobs:
 #          docker run --rm -v $(pwd):/imgs im-buster -resize 200 /imgs/test.tiff webp:/imgs/test-tiff.webp
 #          docker run --rm -v $(pwd):/imgs im-buster -resize 200 /imgs/test.tiff avif:/imgs/test-tiff.avif
 #          docker run --rm -v $(pwd):/imgs im-buster /imgs/test.jpg -antialias -font Helvetica-Bold -pointsize 20 -gravity Southeast -annotate +15+15 'TEST' /imgs/test-text.jpg
-#      - name: Push Debian Buster image
-#        id: docker_push_buster
+      - name: Push Debian Buster image
+        id: docker_push_buster
 #        if: ${{ github.event_name == 'release' }}
-#        uses: docker/build-push-action@v2
-#        with:
-#          context: .
-#          file: ./Dockerfile.buster
-#          push: true
-#          load: false
-#          tags: dpokidov/imagemagick:${{ github.event.release.tag_name }},dpokidov/imagemagick:${{ github.event.release.tag_name }}-buster,dpokidov/imagemagick:latest-buster,dpokidov/imagemagick:latest
-#          cache-from: type=local,src=/tmp/.buildx-cache
-#          cache-to: type=local,dest=/tmp/.buildx-cache
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: ./Dockerfile.buster
+          push: true
+          load: false
+          platforms: linux/arm64
+          tags: dpokidov/imagemagick:testarm,dpokidov/imagemagick:testarm-buster
+          cache-from: type=local,src=/tmp/.buildx-cache
+          cache-to: type=local,dest=/tmp/.buildx-cache
 #      - name: Build Debian Bullseye Image
 #        id: docker_build_bullseye
 #        uses: docker/build-push-action@v2
@@ -130,18 +131,19 @@ jobs:
 #          docker run --rm -v $(pwd):/imgs im-bullseye -resize 200 /imgs/test.tiff webp:/imgs/test-tiff.webp
 #          docker run --rm -v $(pwd):/imgs im-bullseye -resize 200 /imgs/test.tiff avif:/imgs/test-tiff.avif
 #          docker run --rm -v $(pwd):/imgs im-bullseye /imgs/test.jpg -antialias -font DejaVu-Sans -pointsize 20 -gravity Southeast -annotate +15+15 'TEST' /imgs/test-text.jpg
-#      - name: Push Debian Bullseye image
-#        id: docker_push_bullseye
+      - name: Push Debian Bullseye image
+        id: docker_push_bullseye
 #        if: ${{ github.event_name == 'release' }}
-#        uses: docker/build-push-action@v2
-#        with:
-#          context: .
-#          file: ./Dockerfile.bullseye
-#          push: true
-#          load: false
-#          tags: dpokidov/imagemagick:${{ github.event.release.tag_name }}-bullseye,dpokidov/imagemagick:latest-bullseye
-#          cache-from: type=local,src=/tmp/.buildx-cache
-#          cache-to: type=local,dest=/tmp/.buildx-cache
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: ./Dockerfile.bullseye
+          push: true
+          load: false
+          platforms: linux/arm64
+          tags: dpokidov/imagemagick:testarm-bullseye
+          cache-from: type=local,src=/tmp/.buildx-cache
+          cache-to: type=local,dest=/tmp/.buildx-cache
 #      - name: Build Ubuntu Image
 #        id: docker_build_ubuntu
 #        uses: docker/build-push-action@v2
@@ -167,15 +169,16 @@ jobs:
 #          docker run --rm -v $(pwd):/imgs im-ubuntu -resize 200 /imgs/test.tiff webp:/imgs/test-tiff.webp
 #          docker run --rm -v $(pwd):/imgs im-ubuntu -resize 200 /imgs/test.tiff avif:/imgs/test-tiff.avif
 #          docker run --rm -v $(pwd):/imgs im-ubuntu /imgs/test.jpg -antialias -font DejaVu-Sans -pointsize 20 -gravity Southeast -annotate +15+15 'TEST' /imgs/test-text.jpg
-#      - name: Push Ubuntu image
-#        id: docker_push_ubuntu
+      - name: Push Ubuntu image
+        id: docker_push_ubuntu
 #        if: ${{ github.event_name == 'release' }}
-#        uses: docker/build-push-action@v2
-#        with:
-#          context: .
-#          file: ./Dockerfile.ubuntu
-#          push: true
-#          load: false
-#          tags: dpokidov/imagemagick:${{ github.event.release.tag_name }}-ubuntu,dpokidov/imagemagick:latest-ubuntu
-#          cache-from: type=local,src=/tmp/.buildx-cache
-#          cache-to: type=local,dest=/tmp/.buildx-cache
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: ./Dockerfile.ubuntu
+          push: true
+          load: false
+          platforms: linux/arm64
+          tags: dpokidov/imagemagick:testarm-ubuntu
+          cache-from: type=local,src=/tmp/.buildx-cache
+          cache-to: type=local,dest=/tmp/.buildx-cache
