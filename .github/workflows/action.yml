@@ -64,7 +64,7 @@ jobs:
           file: ./Dockerfile.fedora27
           push: true
           load: false
-          platforms: linux/arm64
+          platforms: linux/amd64,linux/arm64
           tags: dpokidov/imagemagick:${{ github.event.release.tag_name }}-fedora27,dpokidov/imagemagick:latest-fedora27
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
@@ -102,7 +102,7 @@ jobs:
           file: ./Dockerfile.buster
           push: true
           load: false
-          platforms: linux/arm64
+          platforms: linux/amd64,linux/arm64
           tags: dpokidov/imagemagick:${{ github.event.release.tag_name }},dpokidov/imagemagick:${{ github.event.release.tag_name }}-buster,dpokidov/imagemagick:latest-buster,dpokidov/imagemagick:latest
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
@@ -140,7 +140,7 @@ jobs:
           file: ./Dockerfile.bullseye
           push: true
           load: false
-          platforms: linux/arm64
+          platforms: linux/amd64,linux/arm64
           tags: dpokidov/imagemagick:${{ github.event.release.tag_name }}-bullseye,dpokidov/imagemagick:latest-bullseye
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
@@ -178,7 +178,7 @@ jobs:
           file: ./Dockerfile.ubuntu
           push: true
           load: false
-          platforms: linux/arm64
+          platforms: linux/amd64,linux/arm64
           tags: dpokidov/imagemagick:${{ github.event.release.tag_name }}-ubuntu,dpokidov/imagemagick:latest-ubuntu
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
