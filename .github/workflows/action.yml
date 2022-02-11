@@ -34,6 +34,7 @@ jobs:
           cache-to: type=local,dest=/tmp/.buildx-cache
       - name: Testing Fedora Image
         run: |
+          docker run --rm im-fedora27 -list configure
           docker run --rm -v $(pwd):/imgs im-fedora27 -resize 500 /imgs/test.jpg /imgs/test-resize.jpg
           docker run --rm -v $(pwd):/imgs im-fedora27 -resize 500 /imgs/test.jpg webp:/imgs/test-jpg.webp
           docker run --rm -v $(pwd):/imgs im-fedora27 -resize 500 /imgs/test.jpg jxr:/imgs/test-jpg.jxr
@@ -44,6 +45,7 @@ jobs:
           docker run --rm -v $(pwd):/imgs im-fedora27 -resize 200 /imgs/test.tiff /imgs/test-resize.tiff
           docker run --rm -v $(pwd):/imgs im-fedora27 -resize 200 /imgs/test.tiff webp:/imgs/test-tiff.webp
           docker run --rm -v $(pwd):/imgs im-fedora27 /imgs/test.jpg -antialias -font NimbusRoman-Bold -pointsize 20 -gravity Southeast -annotate +15+15 'TEST' /imgs/test-text.jpg
+          docker run --rm im-fedora27 -list configure | grep DELEGATES | grep "bzlib fontconfig freetype jng jpeg lcms lzma png ps raw tiff webp xml zlib"
       - name: Push Fedora image
         id: docker_push_fedora
         if: ${{ github.event_name == 'release' }}
@@ -80,6 +82,7 @@ jobs:
           cache-to: type=local,dest=/tmp/.buildx-cache
       - name: Testing Debian Buster Image
         run: |
+          docker run --rm im-buster -list configure
           docker run --rm -v $(pwd):/imgs im-buster -resize 500 /imgs/test.jpg /imgs/test-resize.jpg
           docker run --rm -v $(pwd):/imgs im-buster -resize 500 /imgs/test.jpg webp:/imgs/test-jpg.webp
           docker run --rm -v $(pwd):/imgs im-buster -resize 500 /imgs/test.jpg avif:/imgs/test-jpg.avif
@@ -92,6 +95,7 @@ jobs:
           docker run --rm -v $(pwd):/imgs im-buster -resize 200 /imgs/test.tiff webp:/imgs/test-tiff.webp
           docker run --rm -v $(pwd):/imgs im-buster -resize 200 /imgs/test.tiff avif:/imgs/test-tiff.avif
           docker run --rm -v $(pwd):/imgs im-buster /imgs/test.jpg -antialias -font Helvetica-Bold -pointsize 20 -gravity Southeast -annotate +15+15 'TEST' /imgs/test-text.jpg
+          docker run --rm im-buster -list configure | grep DELEGATES | grep "heic jng jpeg png ps video webp zlib"
       - name: Push Debian Buster image
         id: docker_push_buster
         if: ${{ github.event_name == 'release' }}
@@ -128,6 +132,7 @@ jobs:
           cache-to: type=local,dest=/tmp/.buildx-cache
       - name: Testing Debian Bullseye Image
         run: |
+          docker run --rm im-bullseye -list configure
           docker run --rm -v $(pwd):/imgs im-bullseye -resize 500 /imgs/test.jpg /imgs/test-resize.jpg
           docker run --rm -v $(pwd):/imgs im-bullseye -resize 500 /imgs/test.jpg webp:/imgs/test-jpg.webp
           docker run --rm -v $(pwd):/imgs im-bullseye -resize 500 /imgs/test.jpg avif:/imgs/test-jpg.avif
@@ -140,6 +145,7 @@ jobs:
           docker run --rm -v $(pwd):/imgs im-bullseye -resize 200 /imgs/test.tiff webp:/imgs/test-tiff.webp
           docker run --rm -v $(pwd):/imgs im-bullseye -resize 200 /imgs/test.tiff avif:/imgs/test-tiff.avif
           docker run --rm -v $(pwd):/imgs im-bullseye /imgs/test.jpg -antialias -font DejaVu-Sans -pointsize 20 -gravity Southeast -annotate +15+15 'TEST' /imgs/test-text.jpg
+          docker run --rm im-bullseye -list configure | grep DELEGATES | grep "fontconfig freetype heic jbig jng jpeg lzma png ps tiff webp xml zlib"
       - name: Push Debian Bullseye image
         id: docker_push_bullseye
         if: ${{ github.event_name == 'release' }}
@@ -176,6 +182,7 @@ jobs:
           cache-to: type=local,dest=/tmp/.buildx-cache
       - name: Testing Ubuntu Image
         run: |
+          docker run --rm im-ubuntu -list configure
           docker run --rm -v $(pwd):/imgs im-ubuntu -resize 500 /imgs/test.jpg /imgs/test-resize.jpg
           docker run --rm -v $(pwd):/imgs im-ubuntu -resize 500 /imgs/test.jpg webp:/imgs/test-jpg.webp
           docker run --rm -v $(pwd):/imgs im-ubuntu -resize 500 /imgs/test.jpg avif:/imgs/test-jpg.avif
@@ -188,6 +195,7 @@ jobs:
           docker run --rm -v $(pwd):/imgs im-ubuntu -resize 200 /imgs/test.tiff webp:/imgs/test-tiff.webp
           docker run --rm -v $(pwd):/imgs im-ubuntu -resize 200 /imgs/test.tiff avif:/imgs/test-tiff.avif
           docker run --rm -v $(pwd):/imgs im-ubuntu /imgs/test.jpg -antialias -font DejaVu-Sans -pointsize 20 -gravity Southeast -annotate +15+15 'TEST' /imgs/test-text.jpg
+          docker run --rm im-ubuntu -list configure | grep DELEGATES | grep "fontconfig freetype heic jbig jng jpeg lcms lzma png ps tiff webp xml zlib"
       - name: Push Ubuntu image
         id: docker_push_ubuntu
         if: ${{ github.event_name == 'release' }}
