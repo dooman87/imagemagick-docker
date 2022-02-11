@@ -95,7 +95,7 @@ jobs:
           docker run --rm -v $(pwd):/imgs im-buster -resize 200 /imgs/test.tiff webp:/imgs/test-tiff.webp
           docker run --rm -v $(pwd):/imgs im-buster -resize 200 /imgs/test.tiff avif:/imgs/test-tiff.avif
           docker run --rm -v $(pwd):/imgs im-buster /imgs/test.jpg -antialias -font Helvetica-Bold -pointsize 20 -gravity Southeast -annotate +15+15 'TEST' /imgs/test-text.jpg
-          docker run --rm im-buster -list configure | grep DELEGATES | grep "heic jng jpeg png ps video webp zlib"
+          docker run --rm im-buster -list configure | grep DELEGATES | grep "fontconfig freetype heic jbig jng jpeg lcms lzma png ps tiff webp xml zlib"
       - name: Push Debian Buster image
         id: docker_push_buster
         if: ${{ github.event_name == 'release' }}
@@ -145,7 +145,7 @@ jobs:
           docker run --rm -v $(pwd):/imgs im-bullseye -resize 200 /imgs/test.tiff webp:/imgs/test-tiff.webp
           docker run --rm -v $(pwd):/imgs im-bullseye -resize 200 /imgs/test.tiff avif:/imgs/test-tiff.avif
           docker run --rm -v $(pwd):/imgs im-bullseye /imgs/test.jpg -antialias -font DejaVu-Sans -pointsize 20 -gravity Southeast -annotate +15+15 'TEST' /imgs/test-text.jpg
-          docker run --rm im-bullseye -list configure | grep DELEGATES | grep "fontconfig freetype heic jbig jng jpeg lzma png ps tiff webp xml zlib"
+          docker run --rm im-bullseye -list configure | grep DELEGATES | grep "fontconfig freetype heic jbig jng jpeg lcms lzma png ps tiff webp xml zlib"
       - name: Push Debian Bullseye image
         id: docker_push_bullseye
         if: ${{ github.event_name == 'release' }}
