@@ -15,7 +15,7 @@ RUN apt-get -y update && \
     # libheif
     libde265-0 libde265-dev libjpeg-turbo8 libjpeg-turbo8-dev x265 libx265-dev libtool \
     # IM
-    libpng16-16 libpng-dev libjpeg-turbo8 libjpeg-turbo8-dev libgomp1 ghostscript libxml2-dev libxml2-utils libtiff-dev libfontconfig1-dev libfreetype6-dev fonts-dejavu liblcms2-2 liblcms2-dev && \
+    libsdl1.2-dev libgif-dev libpng16-16 libpng-dev libjpeg-turbo8 libjpeg-turbo8-dev libgomp1 ghostscript libxml2-dev libxml2-utils libtiff-dev libfontconfig1-dev libfreetype6-dev fonts-dejavu liblcms2-2 liblcms2-dev && \
     # Building libwebp
     git clone https://chromium.googlesource.com/webm/libwebp && \
     cd libwebp && git checkout v${LIB_WEBP_VERSION} && \
