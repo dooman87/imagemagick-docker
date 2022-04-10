@@ -9,8 +9,6 @@ ARG LIB_WEBP_VERSION=1.2.2
 
 RUN apt-get -y update && \
     apt-get -y upgrade && \
-    # Do not install libwebp6 because building it from source
-    apt-mark hold libwebp6 && \
     apt-get install -y git make gcc pkg-config autoconf curl g++ \
     # libaom
     yasm cmake \
