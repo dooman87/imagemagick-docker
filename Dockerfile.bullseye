@@ -27,6 +27,8 @@ RUN apt-get -y update && \
     make && make install && \
     ldconfig /usr/local/lib && \
     cd ../ && rm -rf libwebp && \
+    # Removing distro's libwebp \
+    dpkg -P --force-depends libwebp6 && \
     # Building libaom
     git clone https://aomedia.googlesource.com/aom && \
     cd aom && git checkout v${LIB_AOM_VERSION} && cd .. && \
