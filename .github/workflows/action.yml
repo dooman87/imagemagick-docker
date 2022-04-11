@@ -46,11 +46,6 @@ jobs:
           docker run --rm -v $(pwd)/test-images:/imgs im-fedora27 -resize 200 /imgs/test.tiff webp:/imgs/test-tiff.webp
           docker run --rm -v $(pwd)/test-images:/imgs im-fedora27 /imgs/test.jpg -antialias -font NimbusRoman-Bold -pointsize 20 -gravity Southeast -annotate +15+15 'TEST' /imgs/test-text.jpg
           docker run --rm im-fedora27 -list configure | grep DELEGATES | grep "bzlib fontconfig freetype jng jpeg lcms lzma png ps raw tiff webp xml zlib"
-      - name: Upload Test Results
-        uses: actions/upload-artifact@v3
-        with:
-          name: fedora27-tests
-          path: test-images
       - name: Push Fedora image
         id: docker_push_fedora
         if: ${{ github.event_name == 'release' }}

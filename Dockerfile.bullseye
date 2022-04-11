@@ -51,7 +51,7 @@ RUN apt-get -y update && \
     make && make install && \
     ldconfig /usr/local/lib && \
     # Installing libweb6 back to mke autoremove work
-    apt --fix-broken install && \
+    apt -y --fix-broken install && \
     apt-get remove --autoremove --purge -y gcc make cmake curl g++ yasm git autoconf pkg-config libpng-dev libjpeg62-turbo-dev libde265-dev libx265-dev libxml2-dev libtiff-dev libfontconfig1-dev libfreetype6-dev liblcms2-dev libsdl1.2-dev libgif-dev && \
     # Removing distro's libwebp \
     dpkg -P --force-depends libwebp6 && \
