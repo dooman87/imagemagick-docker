@@ -21,15 +21,14 @@ RUN apt-get -y update && \
     # Install manually to prevent deleting with -dev packages
     libxext6 &&\
     # Building libwebp
-    git clone https://chromium.googlesource.com/webm/libwebp && \
-    cd libwebp && git checkout v${LIB_WEBP_VERSION} && \
+    git clone -b v${LIB_WEBP_VERSION} --depth 1 https://chromium.googlesource.com/webm/libwebp && \
+    cd libwebp && \
     ./autogen.sh && ./configure --enable-shared --enable-libwebpdecoder --enable-libwebpdemux --enable-libwebpmux --enable-static=no && \
     make && make install && \
     ldconfig /usr/local/lib && \
     cd ../ && rm -rf libwebp && \
     # Building libaom
-    git clone https://aomedia.googlesource.com/aom && \
-    cd aom && git checkout v${LIB_AOM_VERSION} && cd .. && \
+    git clone -b v${LIB_AOM_VERSION} --depth 1 https://aomedia.googlesource.com/aom && \
     mkdir build_aom && \
     cd build_aom && \
     cmake ../aom/ -DENABLE_TESTS=0 -DBUILD_SHARED_LIBS=1 && make && make install && \
@@ -43,8 +42,8 @@ RUN apt-get -y update && \
     ldconfig /usr/local/lib && \
     rm -rf libheif-${LIB_HEIF_VERSION} && rm libheif.tar.gz && \
     # Building ImageMagick
-    git clone https://github.com/ImageMagick/ImageMagick.git && \
-    cd ImageMagick && git checkout ${IM_VERSION} && \
+    git clone -b ${IM_VERSION} --depth 1 https://github.com/ImageMagick/ImageMagick.git && \
+    cd ImageMagick && \
     ./configure --without-magick-plus-plus --disable-docs --disable-static --with-tiff && \
     make && make install && \
     ldconfig /usr/local/lib && \
