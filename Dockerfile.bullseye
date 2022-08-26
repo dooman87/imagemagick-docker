@@ -24,16 +24,17 @@ RUN apt-get -y update && \
     # Install manually to prevent deleting with -dev packages
     libxext6 && \
     # Building libjxl
-    RUN export CC=clang CXX=clang++ && \
-    RUN git clone -b v{LIBJXL_VERSION} https://github.com/libjxl/libjxl.git --depth 1 --recursive --shallow-submodules && \
-    RUN cd libjxl && \
-    RUN mkdir build && \
-    RUN cd build && \
-    RUN cmake -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=OFF .. && \
-    RUN cmake --build . -- -j$(nproc) && \
-    RUN cmake --install . && \
-    RUN cd ../../ && \
+    export CC=clang CXX=clang++ && \
+    git clone -b v${LIBJXL_VERSION} https://github.com/libjxl/libjxl.git --depth 1 --recursive --shallow-submodules && \
+    cd libjxl && \
+    mkdir build && \
+    cd build && \
+    cmake -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=OFF .. && \
+    cmake --build . -- -j$(nproc) && \
+    cmake --install . && \
+    cd ../../ && \
     rm -rf libjxl && \
+    ldconfig /usr/local/lib && \
     # Building libwebp
     git clone -b v${LIB_WEBP_VERSION} --depth 1 https://chromium.googlesource.com/webm/libwebp && \
     cd libwebp && \
@@ -58,7 +59,7 @@ RUN apt-get -y update && \
     # Building ImageMagick
     git clone -b ${IM_VERSION} --depth 1 https://github.com/ImageMagick/ImageMagick.git && \
     cd ImageMagick && \
-    ./configure --without-magick-plus-plus --disable-docs --disable-static --with-tiff && \
+    ./configure --without-magick-plus-plus --disable-docs --disable-static --with-tiff --with-jxl && \
     make && make install && \
     ldconfig /usr/local/lib && \
     apt-get remove --autoremove --purge -y gcc make cmake clang curl g++ yasm git autoconf pkg-config libpng-dev libjpeg62-turbo-dev libde265-dev libx265-dev libxml2-dev libtiff-dev libfontconfig1-dev libfreetype6-dev liblcms2-dev libsdl1.2-dev libgif-dev libbrotli-dev && \
