@@ -34,6 +34,7 @@ RUN apt-get -y update && \
     cmake --install . && \
     cd ../../ && \
     rm -rf libjxl && \
+    ldconfig /usr/local/lib && \
     # Building libwebp
     git clone https://chromium.googlesource.com/webm/libwebp && \
     cd libwebp && git checkout v${LIB_WEBP_VERSION} && \
