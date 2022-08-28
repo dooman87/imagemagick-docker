@@ -112,7 +112,7 @@ jobs:
           push: true
           load: false
           platforms: linux/amd64,linux/arm64
-          tags: dpokidov/imagemagick:${{ github.event.release.tag_name }},dpokidov/imagemagick:${{ github.event.release.tag_name }}-buster,dpokidov/imagemagick:latest-buster,dpokidov/imagemagick:latest
+          tags: dpokidov/imagemagick:${{ github.event.release.tag_name }}-buster,dpokidov/imagemagick:latest-buster
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
   build-debian-bullseye:
@@ -170,7 +170,7 @@ jobs:
           push: true
           load: false
           platforms: linux/amd64,linux/arm64
-          tags: dpokidov/imagemagick:${{ github.event.release.tag_name }}-bullseye,dpokidov/imagemagick:latest-bullseye
+          tags: dpokidov/imagemagick:${{ github.event.release.tag_name }},dpokidov/imagemagick:${{ github.event.release.tag_name }}-bullseye,dpokidov/imagemagick:latest-bullseye,dpokidov/imagemagick:latest
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
   build-ubuntu:
