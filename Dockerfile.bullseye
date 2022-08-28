@@ -10,7 +10,7 @@ ARG LIBJXL_VERSION=0.6.1
 
 RUN apt-get -y update && \
     apt-get -y upgrade && \
-    apt-get install -y git make gcc pkg-config autoconf curl g++ cmake clang \
+    apt-get install -y git make pkg-config autoconf curl cmake clang \
     # libaom
     yasm \
     # libheif
@@ -23,8 +23,8 @@ RUN apt-get -y update && \
     libpng16-16 libpng-dev libjpeg62-turbo libjpeg62-turbo-dev libgomp1 ghostscript libxml2-dev libxml2-utils libtiff-dev libfontconfig1-dev libfreetype6-dev fonts-dejavu liblcms2-2 liblcms2-dev \
     # Install manually to prevent deleting with -dev packages
     libxext6 libbrotli1 && \
-    # Building libjxl
     export CC=clang CXX=clang++ && \
+    # Building libjxl
     git clone -b v${LIBJXL_VERSION} https://github.com/libjxl/libjxl.git --depth 1 --recursive --shallow-submodules && \
     cd libjxl && \
     mkdir build && \
@@ -62,7 +62,7 @@ RUN apt-get -y update && \
     ./configure --without-magick-plus-plus --disable-docs --disable-static --with-tiff --with-jxl && \
     make && make install && \
     ldconfig /usr/local/lib && \
-    apt-get remove --autoremove --purge -y gcc make cmake clang curl g++ yasm git autoconf pkg-config libpng-dev libjpeg62-turbo-dev libde265-dev libx265-dev libxml2-dev libtiff-dev libfontconfig1-dev libfreetype6-dev liblcms2-dev libsdl1.2-dev libgif-dev libbrotli-dev && \
+    apt-get remove --autoremove --purge -y make cmake clang curl yasm git autoconf pkg-config libpng-dev libjpeg62-turbo-dev libde265-dev libx265-dev libxml2-dev libtiff-dev libfontconfig1-dev libfreetype6-dev liblcms2-dev libsdl1.2-dev libgif-dev libbrotli-dev && \
     rm -rf /var/lib/apt/lists/* && \
     rm -rf /ImageMagick
 
