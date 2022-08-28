@@ -89,16 +89,14 @@ jobs:
           docker run --rm -v $(pwd)/test-images:/imgs im-buster -resize 100 /imgs/test.png /imgs/test-resize.png
           docker run --rm -v $(pwd)/test-images:/imgs im-buster -resize 100 /imgs/test.png webp:/imgs/test-png.webp
           docker run --rm -v $(pwd)/test-images:/imgs im-buster -resize 100 /imgs/test.png avif:/imgs/test-png.avif
-          docker run --rm -v $(pwd)/test-images:/imgs im-buster -resize 100 /imgs/test.png jxl:/imgs/test-png.jxl
           docker run --rm -v $(pwd)/test-images:/imgs im-buster /imgs/test.pdf /imgs/test-pdf.png
           docker run --rm -v $(pwd)/test-images:/imgs im-buster /imgs/jpg-with-metadata.jpg /imgs/jpg-with-metadata.webp
           docker run --rm -v $(pwd)/test-images:/imgs im-buster /imgs/test.gif /imgs/test-gif.webp
           docker run --rm -v $(pwd)/test-images:/imgs im-buster -resize 200 /imgs/test.tiff /imgs/test-resize.tiff
           docker run --rm -v $(pwd)/test-images:/imgs im-buster -resize 200 /imgs/test.tiff webp:/imgs/test-tiff.webp
           docker run --rm -v $(pwd)/test-images:/imgs im-buster -resize 200 /imgs/test.tiff avif:/imgs/test-tiff.avif
-          docker run --rm -v $(pwd)/test-images:/imgs im-buster -resize 200 /imgs/test.tiff jxl:/imgs/test-tiff.jxl
           docker run --rm -v $(pwd)/test-images:/imgs im-buster /imgs/test.jpg -antialias -font Helvetica-Bold -pointsize 20 -gravity Southeast -annotate +15+15 'TEST' /imgs/test-text.jpg
-          docker run --rm im-buster -list configure | grep DELEGATES | grep "fontconfig freetype heic jbig jng jpeg jxl lcms lzma png ps tiff webp x xml zlib"
+          docker run --rm im-buster -list configure | grep DELEGATES | grep "fontconfig freetype heic jbig jng jpeg lcms lzma png ps tiff webp x xml zlib"
       - name: Upload Test Results
         uses: actions/upload-artifact@v3
         with:
