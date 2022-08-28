@@ -34,10 +34,9 @@ Use tags to switch between base images.
 Not all images support the same features. Below is a table of known
 formats supported by different base images:
 
-| Base Image | Jpeg  | PNG   | JpegXR   | WebP   | AVIF   | PDF   | TIFF |
-| ---------- | :---: | :---: | :------: | :----: | :----: | :---: | :--: |
-| fedora27   | X     | X     | X        | X      |        | X     | X    |
-| buster     | X     | X     |          | X      | X      | X     | X    |
-| bullseye   | X     | X     |          | X      | X      | X     | X    |
-| ubuntu     | X     | X     |          | X      | X      | X     | X    |
-
+| Base Image      | Jpeg | PNG | WebP | AVIF | JPEG XL | JpegXR  | PDF  | TIFF |
+|-----------------|:----:|:---:|:----:|:----:|:-------:|:-------:|:----:|:----:|
+| Debian Bullseye | ✅    |  ✅  |  ✅   |  ✅   |    ✅    |    ✅    |  ✅   |  ✅   |
+| Ubuntu Focal    |  ✅   |  ✅  |  ✅   |  ✅   |    ✅    |    ✅    |  ✅   |  ✅   |
+| Fedora 27       |  ✅   |  ✅  |  ✅   |      |         |    ✅    |   ✅   |  ✅   |
+| Debian Buster   |  ✅   |  ✅  |  ✅   |  ✅   |         |    ✅    |  ✅   |  ✅   |
