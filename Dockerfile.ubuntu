@@ -14,13 +14,13 @@ RUN apt-get -y update && \
     # libaom
     yasm \
     # libheif
-    libde265-0 libde265-dev libjpeg-turbo8 libjpeg-turbo8-dev x265 libx265-dev libtool \
+    libde265-0 libde265-dev libjpeg-turbo8-dev x265 libx265-dev libtool \
     # libwebp
     libsdl1.2-dev libgif-dev \
     # libjxl
     libbrotli-dev \
     # IM
-    libpng16-16 libpng-dev libjpeg-turbo8 libjpeg-turbo8-dev libgomp1 ghostscript libxml2-dev libxml2-utils libtiff-dev libfontconfig1-dev libfreetype6-dev fonts-dejavu liblcms2-2 liblcms2-dev \
+    libpng16-16 libpng-dev libgomp1 ghostscript libxml2-dev libxml2-utils libtiff-dev libfontconfig1-dev libfreetype6-dev fonts-dejavu liblcms2-dev \
     # Install manually to prevent deleting with -dev packages
     libxext6 libbrotli1 && \
     # Building libjxl
