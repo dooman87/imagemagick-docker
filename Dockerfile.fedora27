@@ -7,7 +7,7 @@ RUN dnf -y install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-re
 
 WORKDIR /opt
 
-RUN yum install -y libtool-ltdl libjpeg libjpeg-devel libpng libpng-devel libtiff libtiff-devel libwebp libwebp-devel LibRaw LibRaw-devel jxrlib git make automake gcc pkgconf ghostscript-core libxml2-devel fontconfig-devel freetype-devel && \
+RUN yum install -y libtool-ltdl libjpeg libjpeg-devel libpng libpng-devel libtiff libtiff-devel libwebp libwebp-devel LibRaw LibRaw-devel jxrlib git make automake gcc gcc-c++ pkgconf ghostscript-core libxml2-devel fontconfig-devel freetype-devel && \
     git clone -b ${IM_VERSION} --depth 1 https://github.com/ImageMagick/ImageMagick.git && \
     cd ImageMagick && \
     ./configure && make && make install && \
