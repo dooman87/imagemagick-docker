@@ -1,4 +1,5 @@
 name: ci
+description: Builds and publish docker image
 
 on:
   push:
@@ -15,7 +16,7 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Setup Docker
         uses: ./.github/actions/setup-docker
         with:
@@ -23,7 +24,7 @@ jobs:
           docker-password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Build Fedora image
         id: docker_build_fedora
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v3
         with:
           context: .
           file: ./Dockerfile.fedora27
@@ -49,7 +50,7 @@ jobs:
       - name: Push Fedora image
         id: docker_push_fedora
         if: ${{ github.event_name == 'release' }}
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v3
         with:
           context: .
           file: ./Dockerfile.fedora27
@@ -63,7 +64,7 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Setup Docker
         uses: ./.github/actions/setup-docker
         with:
@@ -71,7 +72,7 @@ jobs:
           docker-password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Build Debian Buster Image
         id: docker_build_buster
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v3
         with:
           context: .
           file: ./Dockerfile.buster
@@ -105,7 +106,7 @@ jobs:
       - name: Push Debian Buster image
         id: docker_push_buster
         if: ${{ github.event_name == 'release' }}
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v3
         with:
           context: .
           file: ./Dockerfile.buster
@@ -119,7 +120,7 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Setup Docker
         uses: ./.github/actions/setup-docker
         with:
@@ -127,7 +128,7 @@ jobs:
           docker-password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Build Debian Bullseye Image
         id: docker_build_bullseye
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v3
         with:
           context: .
           file: ./Dockerfile.bullseye
@@ -163,7 +164,7 @@ jobs:
       - name: Push Debian Bullseye image
         id: docker_push_bullseye
         if: ${{ github.event_name == 'release' }}
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v3
         with:
           context: .
           file: ./Dockerfile.bullseye
@@ -177,7 +178,7 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Setup Docker
         uses: ./.github/actions/setup-docker
         with:
@@ -185,7 +186,7 @@ jobs:
           docker-password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Build Ubuntu Image
         id: docker_build_ubuntu
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v3
         with:
           context: .
           file: ./Dockerfile.ubuntu
@@ -221,7 +222,7 @@ jobs:
       - name: Push Ubuntu image
         id: docker_push_ubuntu
         if: ${{ github.event_name == 'release' }}
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v3
         with:
           context: .
           file: ./Dockerfile.ubuntu
