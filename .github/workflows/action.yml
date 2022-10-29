@@ -1,5 +1,4 @@
 name: ci
-description: Builds and publish docker image
 
 on:
   push:

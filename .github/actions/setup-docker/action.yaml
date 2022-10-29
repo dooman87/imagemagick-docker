@@ -1,5 +1,4 @@
 name: 'setup-docker'
-description: Setting up docker
 inputs:
   docker-user:
     required: true
