@@ -91,7 +91,7 @@ jobs:
           docker run --rm -v $(pwd)/test-images:/imgs im-buster -resize 100 /imgs/test.png avif:/imgs/test-png.avif
           docker run --rm -v $(pwd)/test-images:/imgs im-buster /imgs/test.pdf /imgs/test-pdf.png
           docker run --rm -v $(pwd)/test-images:/imgs im-buster /imgs/jpg-with-metadata.jpg /imgs/jpg-with-metadata.webp
-          docker run --rm -v $(pwd)/test-images:/imgs im-buster /imgs/test.gif /imgs/test-gif.webp
+          docker run --rm -v $(pwd)/test-images:/imgs im-buster -coalesce /imgs/test.gif /imgs/test-gif.webp
           docker run --rm -v $(pwd)/test-images:/imgs im-buster -resize 200 /imgs/test.tiff /imgs/test-resize.tiff
           docker run --rm -v $(pwd)/test-images:/imgs im-buster -resize 200 /imgs/test.tiff webp:/imgs/test-tiff.webp
           docker run --rm -v $(pwd)/test-images:/imgs im-buster -resize 200 /imgs/test.tiff avif:/imgs/test-tiff.avif
@@ -148,7 +148,7 @@ jobs:
           docker run --rm -v $(pwd)/test-images:/imgs im-bullseye -resize 100 /imgs/test.png jxl:/imgs/test-png.jxl
           docker run --rm -v $(pwd)/test-images:/imgs im-bullseye /imgs/test.pdf /imgs/test-pdf.png
           docker run --rm -v $(pwd)/test-images:/imgs im-bullseye /imgs/jpg-with-metadata.jpg /imgs/jpg-with-metadata.webp
-          docker run --rm -v $(pwd)/test-images:/imgs im-bullseye /imgs/test.gif /imgs/test-gif.webp
+          docker run --rm -v $(pwd)/test-images:/imgs im-bullseye -coalesce /imgs/test.gif /imgs/test-gif.webp
           docker run --rm -v $(pwd)/test-images:/imgs im-bullseye -resize 200 /imgs/test.tiff /imgs/test-resize.tiff
           docker run --rm -v $(pwd)/test-images:/imgs im-bullseye -resize 200 /imgs/test.tiff webp:/imgs/test-tiff.webp
           docker run --rm -v $(pwd)/test-images:/imgs im-bullseye -resize 200 /imgs/test.tiff avif:/imgs/test-tiff.avif
@@ -206,7 +206,7 @@ jobs:
           docker run --rm -v $(pwd)/test-images:/imgs im-ubuntu -resize 100 /imgs/test.png jxl:/imgs/test-png.jxl
           docker run --rm -v $(pwd)/test-images:/imgs im-ubuntu /imgs/test.pdf /imgs/test-pdf.png
           docker run --rm -v $(pwd)/test-images:/imgs im-ubuntu /imgs/jpg-with-metadata.jpg /imgs/jpg-with-metadata.webp
-          docker run --rm -v $(pwd)/test-images:/imgs im-ubuntu /imgs/test.gif /imgs/test-gif.webp
+          docker run --rm -v $(pwd)/test-images:/imgs im-ubuntu -coalesce /imgs/test.gif /imgs/test-gif.webp
           docker run --rm -v $(pwd)/test-images:/imgs im-ubuntu -resize 200 /imgs/test.tiff /imgs/test-resize.tiff
           docker run --rm -v $(pwd)/test-images:/imgs im-ubuntu -resize 200 /imgs/test.tiff webp:/imgs/test-tiff.webp
           docker run --rm -v $(pwd)/test-images:/imgs im-ubuntu -resize 200 /imgs/test.tiff avif:/imgs/test-tiff.avif
