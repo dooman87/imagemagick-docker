@@ -27,7 +27,7 @@ $ docker run --entrypoint=identify -v /your/images:/imgs dpokidov/imagemagick /i
 
 ## Base images 
 
-There are four base images: Fedora:27, Debian Buster (old stable), Debian Bullseye (stable) and Ubuntu Focal. By default, Debian Buster is used. 
+There are four base images: Debian Bullseye (stable) and Ubuntu Focal. By default, Debian bullseye is used. 
 
 Use tags to switch between base images. 
 
@@ -38,5 +38,3 @@ formats supported by different base images:
 |-----------------|:----:|:---:|:----:|:----:|:-------:|:-------:|:----:|:----:|
 | Debian Bullseye | ✅    |  ✅  |  ✅   |  ✅   |    ✅    |    ✅    |  ✅   |  ✅   |
 | Ubuntu Focal    |  ✅   |  ✅  |  ✅   |  ✅   |    ✅    |    ✅    |  ✅   |  ✅   |
-| Fedora 27       |  ✅   |  ✅  |  ✅   |      |         |    ✅    |   ✅   |  ✅   |
-| Debian Buster   |  ✅   |  ✅  |  ✅   |  ✅   |         |    ✅    |  ✅   |  ✅   |
