@@ -53,7 +53,7 @@ RUN apt-get -y update && \
     rm -rf build_aom && \
     # Building libheif
     curl -L https://github.com/strukturag/libheif/releases/download/v${LIB_HEIF_VERSION}/libheif-${LIB_HEIF_VERSION}.tar.gz -o libheif.tar.gz && \
-    tar -xzvf libheif.tar.gz && cd libheif-${LIB_HEIF_VERSION}/ && ./autogen.sh && ./configure && make && make install && cd .. && \
+    tar -xzvf libheif.tar.gz && cd libheif-${LIB_HEIF_VERSION}/ && mkdir build && cd build && cmake --preset=release .. && make && make install && cd ../../ \
     ldconfig /usr/local/lib && \
     rm -rf libheif-${LIB_HEIF_VERSION} && rm libheif.tar.gz && \
     # Building ImageMagick
