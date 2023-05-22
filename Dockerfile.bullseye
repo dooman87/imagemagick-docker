@@ -2,7 +2,7 @@ FROM debian:bullseye-slim
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-ARG IM_VERSION=7.1.1-8
+ARG IM_VERSION=7.1.1-10
 ARG LIB_HEIF_VERSION=1.16.1
 ARG LIB_AOM_VERSION=3.6.1
 ARG LIB_WEBP_VERSION=1.3.0
@@ -38,10 +38,10 @@ RUN apt-get -y update && \
     # Building libwebp
     git clone -b v${LIB_WEBP_VERSION} --depth 1 https://chromium.googlesource.com/webm/libwebp && \
     cd libwebp && \
-    ./autogen.sh && ./configure --enable-shared --enable-libwebpdecoder --enable-libwebpdemux --enable-libwebpmux --enable-static=no && \
+    mkdir build && cd build && cmake ../ && make && make install && \
     make && make install && \
     ldconfig /usr/local/lib && \
-    cd ../ && rm -rf libwebp && \
+    cd ../../ && rm -rf libwebp && \
     # Building libaom
     git clone -b v${LIB_AOM_VERSION} --depth 1 https://aomedia.googlesource.com/aom && \
     mkdir build_aom && \
