@@ -2,7 +2,7 @@ FROM debian:bullseye-slim
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-ARG IM_VERSION=7.1.1-12
+ARG IM_VERSION=7.1.1-13
 ARG LIB_HEIF_VERSION=1.16.2
 ARG LIB_AOM_VERSION=3.6.1
 ARG LIB_WEBP_VERSION=1.3.1
@@ -20,7 +20,7 @@ RUN apt-get -y update && \
     # libjxl
     libbrotli-dev \
     # IM
-    libpng16-16 libpng-dev libjpeg62-turbo libjpeg62-turbo-dev libgomp1 ghostscript libxml2-dev libxml2-utils libtiff-dev libfontconfig1-dev libfreetype6-dev fonts-dejavu liblcms2-2 liblcms2-dev \
+    libpng16-16 libpng-dev libjpeg62-turbo libjpeg62-turbo-dev libgomp1 ghostscript libxml2-dev libxml2-utils libtiff-dev libfontconfig1-dev libfreetype6-dev fonts-dejavu liblcms2-2 liblcms2-dev libtcmalloc-minimal4 \
     # Install manually to prevent deleting with -dev packages
     libxext6 libbrotli1 && \
     export CC=clang CXX=clang++ && \
@@ -59,7 +59,7 @@ RUN apt-get -y update && \
     # Building ImageMagick
     git clone -b ${IM_VERSION} --depth 1 https://github.com/ImageMagick/ImageMagick.git && \
     cd ImageMagick && \
-    ./configure --without-magick-plus-plus --disable-docs --disable-static --with-tiff --with-jxl && \
+    ./configure --without-magick-plus-plus --disable-docs --disable-static --with-tiff --with-jxl --with-tcmalloc && \
     make && make install && \
     ldconfig /usr/local/lib && \
     apt-get remove --autoremove --purge -y make cmake clang clang-11 curl yasm git autoconf automake pkg-config libpng-dev libjpeg62-turbo-dev libde265-dev libx265-dev libxml2-dev libtiff-dev libfontconfig1-dev libfreetype6-dev liblcms2-dev libsdl1.2-dev libgif-dev libbrotli-dev && \
