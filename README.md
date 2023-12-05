@@ -6,14 +6,14 @@
 
 ## Overview
 
-Delivers the latest version of the [ImageMagick](https://github.com/ImageMagick/ImageMagick) 7 to your environment in Docker container.
+Delivers the latest version of the [ImageMagick](https://github.com/ImageMagick/ImageMagick) 7 to your environment in a Docker container.
 
-The purpose of that image is to be able to run the latest version of ImageMagick in stable
-Linux environment with supporting modern web formats. 
+The purpose of this image is to be able to run the latest version of ImageMagick in stable
+Linux environment to support next generation image format that could be used on Web. 
 
 ## Usage
 
-By default, container will run convert command
+By default, a container will run convert command
 
 ```
 $ docker run -v /your/images:/imgs dpokidov/imagemagick /imgs/sample.png -resize 100x100 /imgs/resized-sample.png
@@ -27,14 +27,14 @@ $ docker run --entrypoint=identify -v /your/images:/imgs dpokidov/imagemagick /i
 
 ## Base images 
 
-There are four base images: Debian Bullseye (stable) and Ubuntu Focal. By default, Debian bullseye is used. 
+There are three base images: Debian Bullseye (default), Bookworm and Ubuntu Focal.  
 
 Use tags to switch between base images. 
 
-Not all images support the same features. Below is a table of known
-formats supported by different base images:
+All images support the same set of formats:
 
 | Base Image      | Jpeg | PNG | WebP | AVIF | JPEG XL | JpegXR  | PDF  | TIFF |
 |-----------------|:----:|:---:|:----:|:----:|:-------:|:-------:|:----:|:----:|
 | Debian Bullseye | ✅    |  ✅  |  ✅   |  ✅   |    ✅    |    ✅    |  ✅   |  ✅   |
+| Debian Bookworm | ✅    |  ✅  |  ✅   |  ✅   |    ✅    |    ✅    |  ✅   |  ✅   |
 | Ubuntu Focal    |  ✅   |  ✅  |  ✅   |  ✅   |    ✅    |    ✅    |  ✅   |  ✅   |
