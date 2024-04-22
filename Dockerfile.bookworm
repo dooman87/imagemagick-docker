@@ -2,10 +2,10 @@ FROM debian:bookworm-slim
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-ARG IM_VERSION=7.1.1-29
+ARG IM_VERSION=7.1.1-31
 ARG LIB_HEIF_VERSION=1.17.6
-ARG LIB_AOM_VERSION=3.8.1
-ARG LIB_WEBP_VERSION=1.3.2
+ARG LIB_AOM_VERSION=3.8.2
+ARG LIB_WEBP_VERSION=1.4.0
 ARG LIBJXL_VERSION=0.10.2
 
 RUN apt-get -y update && \
@@ -39,7 +39,6 @@ RUN apt-get -y update && \
     git clone -b v${LIB_WEBP_VERSION} --depth 1 https://chromium.googlesource.com/webm/libwebp && \
     cd libwebp && \
     mkdir build && cd build && cmake ../ && make && make install && \
-    make && make install && \
     ldconfig /usr/local/lib && \
     cd ../../ && rm -rf libwebp && \
     # Building libaom
@@ -52,10 +51,10 @@ RUN apt-get -y update && \
     rm -rf aom && \
     rm -rf build_aom && \
     # Building libheif
-    curl -L https://github.com/strukturag/libheif/releases/download/v${LIB_HEIF_VERSION}/libheif-${LIB_HEIF_VERSION}.tar.gz -o libheif.tar.gz && \
-    tar -xzvf libheif.tar.gz && cd libheif-${LIB_HEIF_VERSION}/ && mkdir build && cd build && cmake --preset=release .. && make && make install && cd ../../ \
+    git clone -b v${LIB_HEIF_VERSION} --depth 1 https://github.com/strukturag/libheif.git \
+    cd libheif/ && mkdir build && cd build && cmake --preset=release .. && make && make install && cd ../../ \
     ldconfig /usr/local/lib && \
-    rm -rf libheif-${LIB_HEIF_VERSION} && rm libheif.tar.gz && \
+    rm -rf libheif && \
     # Building ImageMagick
     git clone -b ${IM_VERSION} --depth 1 https://github.com/ImageMagick/ImageMagick.git && \
     cd ImageMagick && \
