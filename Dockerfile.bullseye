@@ -51,8 +51,8 @@ RUN apt-get -y update && \
     rm -rf aom && \
     rm -rf build_aom && \
     # Building libheif
-    git clone -b v${LIB_HEIF_VERSION} --depth 1 https://github.com/strukturag/libheif.git \
-    cd libheif/ && mkdir build && cd build && cmake --preset=release .. && make && make install && cd ../../ \
+    git clone -b v${LIB_HEIF_VERSION} --depth 1 https://github.com/strukturag/libheif.git && \
+    cd libheif/ && mkdir build && cd build && cmake --preset=release .. && make && make install && cd ../../ && \
     ldconfig /usr/local/lib && \
     rm -rf libheif && \
     # Building ImageMagick
