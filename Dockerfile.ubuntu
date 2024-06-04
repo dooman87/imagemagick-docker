@@ -10,7 +10,7 @@ ARG LIBJXL_VERSION=0.10.2
 
 RUN apt-get -y update && \
     apt-get -y upgrade && \
-    apt-get install -y git make gcc pkg-config autoconf curl g++ cmake clang-11 \
+    apt-get install -y git make gcc pkg-config autoconf curl g++ cmake clang \
     # libaom
     yasm \
     # libheif
@@ -24,7 +24,7 @@ RUN apt-get -y update && \
     # Install manually to prevent deleting with -dev packages
     libxext6 libbrotli1 && \
     # Building libjxl
-    export CC=clang-11 CXX=clang++-11 && \
+    export CC=clang-18 CXX=clang++-18 && \
     git clone -b v${LIBJXL_VERSION} https://github.com/libjxl/libjxl.git --depth 1 --recursive --shallow-submodules && \
     cd libjxl && \
     mkdir build && \
