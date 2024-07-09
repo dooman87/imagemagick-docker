@@ -23,7 +23,7 @@ jobs:
           docker-password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Build Debian Bullseye Image
         id: docker_build_bullseye
-        uses: docker/build-push-action@v4
+        uses: docker/build-push-action@v5
         with:
           context: .
           file: ./Dockerfile.bullseye
@@ -59,7 +59,7 @@ jobs:
       - name: Push Debian Bullseye image
         id: docker_push_bullseye
         if: ${{ github.event_name == 'release' }}
-        uses: docker/build-push-action@v4
+        uses: docker/build-push-action@v5
         with:
           context: .
           file: ./Dockerfile.bullseye
@@ -81,7 +81,7 @@ jobs:
           docker-password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Build Debian Bookworm Image
         id: docker_build_bookworm
-        uses: docker/build-push-action@v4
+        uses: docker/build-push-action@v5
         with:
           context: .
           file: ./Dockerfile.bookworm
@@ -117,7 +117,7 @@ jobs:
       - name: Push Debian Bookworm image
         id: docker_push_bookworm
         if: ${{ github.event_name == 'release' }}
-        uses: docker/build-push-action@v4
+        uses: docker/build-push-action@v5
         with:
           context: .
           file: ./Dockerfile.bookworm
