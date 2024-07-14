@@ -24,6 +24,12 @@ RUN apt-get -y update && \
     # Install manually to prevent deleting with -dev packages
     libxext6 libbrotli1 && \
     export CC=clang CXX=clang++ && \
+    # Building libwebp
+    git clone -b v${LIB_WEBP_VERSION} --depth 1 https://chromium.googlesource.com/webm/libwebp && \
+    cd libwebp && \
+    mkdir build && cd build && cmake ../ && make && make install && \
+    ldconfig /usr/local/lib && \
+    cd ../../ && rm -rf libwebp && \
     # Building libjxl
     git clone -b v${LIBJXL_VERSION} https://github.com/libjxl/libjxl.git --depth 1 --recursive --shallow-submodules && \
     cd libjxl && \
@@ -35,12 +41,6 @@ RUN apt-get -y update && \
     cd ../../ && \
     rm -rf libjxl && \
     ldconfig /usr/local/lib && \
-    # Building libwebp
-    git clone -b v${LIB_WEBP_VERSION} --depth 1 https://chromium.googlesource.com/webm/libwebp && \
-    cd libwebp && \
-    mkdir build && cd build && cmake ../ && make && make install && \
-    ldconfig /usr/local/lib && \
-    cd ../../ && rm -rf libwebp && \
     # Building libaom
     git clone -b v${LIB_AOM_VERSION} --depth 1 https://aomedia.googlesource.com/aom && \
     mkdir build_aom && \
