@@ -55,7 +55,7 @@ RUN apt-get -y update && \
     # Building libheif
     git clone -b v${LIB_HEIF_VERSION} --depth 1 https://github.com/strukturag/libheif.git && \
     cd libheif/ && \
-    git apply /libheif-libbrotli.patch && \
+    mv /libheif-libbrotli.patch ./ && git apply ./libheif-libbrotli.patch && \
     mkdir build && cd build && cmake --preset=release .. && make && make install && cd ../../ && \
     ldconfig /usr/local/lib && \
     rm -rf libheif && \
