@@ -3,7 +3,7 @@ FROM ubuntu:noble
 ENV DEBIAN_FRONTEND=noninteractive
 
 ARG IM_VERSION=7.1.1-35
-ARG LIB_HEIF_VERSION=1.17.6
+ARG LIB_HEIF_VERSION=1.18.0
 ARG LIB_AOM_VERSION=3.9.1
 ARG LIB_WEBP_VERSION=1.4.0
 ARG LIBJXL_VERSION=0.10.3
@@ -38,7 +38,7 @@ RUN apt-get -y update && \
     # Building libwebp
     git clone -b v${LIB_WEBP_VERSION} --depth 1 https://chromium.googlesource.com/webm/libwebp && \
     cd libwebp && \
-    mkdir build && cd build && cmake ../ && make && make install && \
+    mkdir build && cd build && cmake -DBUILD_SHARED_LIBS=ON ../ && make && make install && \
     ldconfig /usr/local/lib && \
     cd ../../ && rm -rf libwebp && \
     # Building libaom

@@ -29,7 +29,7 @@ RUN apt-get -y update && \
     # Building libwebp
     git clone -b v${LIB_WEBP_VERSION} --depth 1 https://chromium.googlesource.com/webm/libwebp && \
     cd libwebp && \
-    mkdir build && cd build && cmake ../ && make && make install && \
+    mkdir build && cd build && cmake -DBUILD_SHARED_LIBS=ON ../ && make && make install && \
     ldconfig /usr/local/lib && \
     cd ../../ && rm -rf libwebp && \
     # Building libjxl
