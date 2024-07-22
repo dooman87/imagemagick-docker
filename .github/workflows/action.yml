@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Setup Docker
         uses: ./.github/actions/setup-docker
         with:
@@ -52,7 +52,7 @@ jobs:
           docker run --rm -v $(pwd)/test-images:/imgs im-bullseye /imgs/test.jpg -antialias -font DejaVu-Sans -pointsize 20 -gravity Southeast -annotate +15+15 'TEST' /imgs/test-text.jpg
           docker run --rm im-bullseye -list configure | grep DELEGATES | grep "fontconfig freetype heic jbig jng jpeg jxl lcms lzma png ps tiff webp x xml zlib"
       - name: Upload Test Results
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: bullseye-tests
           path: test-images
@@ -73,7 +73,7 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Setup Docker
         uses: ./.github/actions/setup-docker
         with:
@@ -110,7 +110,7 @@ jobs:
           docker run --rm -v $(pwd)/test-images:/imgs im-bookworm /imgs/test.jpg -antialias -font DejaVu-Sans -pointsize 20 -gravity Southeast -annotate +15+15 'TEST' /imgs/test-text.jpg
           docker run --rm im-bookworm -list configure | grep DELEGATES | grep "fontconfig freetype heic jbig jng jpeg jxl lcms lzma png ps tiff webp x xml zlib"
       - name: Upload Test Results
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: bookworm-tests
           path: test-images
@@ -131,7 +131,7 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Setup Docker
         uses: ./.github/actions/setup-docker
         with:
@@ -168,7 +168,7 @@ jobs:
           docker run --rm -v $(pwd)/test-images:/imgs im-ubuntu /imgs/test.jpg -antialias -font DejaVu-Sans -pointsize 20 -gravity Southeast -annotate +15+15 'TEST' /imgs/test-text.jpg
           docker run --rm im-ubuntu -list configure | grep DELEGATES | grep "fontconfig freetype heic jbig jng jpeg jxl lcms lzma png ps tiff webp x xml zlib"
       - name: Upload Test Results
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: ubuntu-tests
           path: test-images
