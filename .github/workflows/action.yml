@@ -16,6 +16,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+      - name: Install Docker
+        run: brew cask install docker
       - name: Setup Docker
         uses: ./.github/actions/setup-docker
         with:
