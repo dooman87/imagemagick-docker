@@ -51,7 +51,7 @@ jobs:
           docker run --rm -v $(pwd)/test-images:/imgs im-bullseye -resize 200 /imgs/test.tiff avif:/imgs/test-tiff.avif
           docker run --rm -v $(pwd)/test-images:/imgs im-bullseye -resize 200 /imgs/test.tiff jxl:/imgs/test-tiff.jxl
           docker run --rm -v $(pwd)/test-images:/imgs im-bullseye /imgs/test.jpg -antialias -font DejaVu-Sans -pointsize 20 -gravity Southeast -annotate +15+15 'TEST' /imgs/test-text.jpg
-          docker run --rm im-bullseye -list configure | grep DELEGATES | grep "fontconfig freetype heic jbig jng jpeg jxl lcms lzma png ps tiff webp x xml zlib"
+          docker run --rm im-bullseye -list configure | grep DELEGATES | grep "fftw fontconfig freetype heic jbig jng jpeg jxl lcms lzma png ps tiff webp x xml zlib"
       - name: Upload Test Results
         uses: actions/upload-artifact@v4
         with:
@@ -109,7 +109,7 @@ jobs:
           docker run --rm -v $(pwd)/test-images:/imgs im-bookworm -resize 200 /imgs/test.tiff avif:/imgs/test-tiff.avif
           docker run --rm -v $(pwd)/test-images:/imgs im-bookworm -resize 200 /imgs/test.tiff jxl:/imgs/test-tiff.jxl
           docker run --rm -v $(pwd)/test-images:/imgs im-bookworm /imgs/test.jpg -antialias -font DejaVu-Sans -pointsize 20 -gravity Southeast -annotate +15+15 'TEST' /imgs/test-text.jpg
-          docker run --rm im-bookworm -list configure | grep DELEGATES | grep "fontconfig freetype heic jbig jng jpeg jxl lcms lzma png ps tiff webp x xml zlib"
+          docker run --rm im-bookworm -list configure | grep DELEGATES | grep "fftw fontconfig freetype heic jbig jng jpeg jxl lcms lzma png ps tiff webp x xml zlib zstd"
       - name: Upload Test Results
         uses: actions/upload-artifact@v4
         with:
@@ -167,7 +167,7 @@ jobs:
           docker run --rm -v $(pwd)/test-images:/imgs im-ubuntu -resize 200 /imgs/test.tiff avif:/imgs/test-tiff.avif
           docker run --rm -v $(pwd)/test-images:/imgs im-ubuntu -resize 200 /imgs/test.tiff jxl:/imgs/test-tiff.jxl
           docker run --rm -v $(pwd)/test-images:/imgs im-ubuntu /imgs/test.jpg -antialias -font DejaVu-Sans -pointsize 20 -gravity Southeast -annotate +15+15 'TEST' /imgs/test-text.jpg
-          docker run --rm im-ubuntu -list configure | grep DELEGATES | grep "fontconfig freetype heic jbig jng jpeg jxl lcms lzma png ps tiff webp x xml zlib"
+          docker run --rm im-ubuntu -list configure | grep DELEGATES | grep "bzlib fftw fontconfig freetype heic jbig jng jpeg jxl lcms lzma png ps tiff webp x xml zlib zstd"
       - name: Upload Test Results
         uses: actions/upload-artifact@v4
         with:
