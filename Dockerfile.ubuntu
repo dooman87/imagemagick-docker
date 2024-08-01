@@ -2,13 +2,11 @@ FROM ubuntu:noble
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-ARG IM_VERSION=7.1.1-35
-ARG LIB_HEIF_VERSION=1.18.0
+ARG IM_VERSION=7.1.1-36
+ARG LIB_HEIF_VERSION=1.18.1
 ARG LIB_AOM_VERSION=3.9.1
 ARG LIB_WEBP_VERSION=1.4.0
 ARG LIBJXL_VERSION=0.10.3
-
-COPY libheif-libbrotli.patch /
 
 RUN apt-get -y update && \
     apt-get -y upgrade && \
@@ -55,7 +53,6 @@ RUN apt-get -y update && \
     # Building libheif \
     git clone -b v${LIB_HEIF_VERSION} --depth 1 https://github.com/strukturag/libheif.git && \
     cd libheif/ && \
-    mv /libheif-libbrotli.patch ./ && git apply ./libheif-libbrotli.patch && \
     mkdir build && cd build && cmake --preset=release .. && make && make install && cd ../../ && \
     ldconfig /usr/local/lib && \
     rm -rf libheif && \
