@@ -36,6 +36,6 @@ All images support the same set of formats:
 | Base Image      | Jpeg | PNG | WebP | AVIF | JPEG XL | JpegXR  | PDF  | TIFF |
 |-----------------|:----:|:---:|:----:|:----:|:-------:|:-------:|:----:|:----:|
 | Debian Bullseye | ✅    |  ✅  |  ✅   |  ✅   |    ✅    |    ✅    |  ✅   |  ✅   |
-| Debian Bookworm | ✅    |  ✅  |  ✅   |  ✅   |    ✅    |    ✅    |  ✅   |  ✅   |
+| Debian Trixie   | ✅    |  ✅  |  ✅   |  ✅   |    ✅    |    ✅    |  ✅   |  ✅   |
 | Ubuntu Focal    |  ✅   |  ✅  |  ✅   |  ✅   |    ✅    |    ✅    |  ✅   |  ✅   |
 
