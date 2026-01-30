@@ -27,7 +27,7 @@ $ docker run --entrypoint=identify -v /your/images:/imgs dpokidov/imagemagick /i
 
 ## Base images 
 
-There are three base images: Debian Bullseye (default), Bookworm and Ubuntu Focal.  
+There are three base images: Debian Trixie, Debian Bullseye (default), and Ubuntu Focal.  
 
 Use tags to switch between base images. 
 
@@ -39,3 +39,4 @@ All images support the same set of formats:
 | Debian Trixie   | ✅    |  ✅  |  ✅   |  ✅   |    ✅    |    ✅    |  ✅   |  ✅   |
 | Ubuntu Focal    |  ✅   |  ✅  |  ✅   |  ✅   |    ✅    |    ✅    |  ✅   |  ✅   |
 
+Debian Trixie is using a different entrypoint - `magick` oppose to `convert` in older images.
