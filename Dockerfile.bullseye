@@ -67,4 +67,4 @@ RUN apt-get -y update && \
 
 WORKDIR /imgs
 
-ENTRYPOINT ["convert"]
+ENTRYPOINT ["magick"]
